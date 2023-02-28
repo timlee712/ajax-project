@@ -1,0 +1,8 @@
+.hidden {
+  display: none;
+}
+
+.filled {
+  background-color: #f84453;
+  border: 2.5px solid #f84453;
+}
