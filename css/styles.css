@@ -1,0 +1,432 @@
+* {
+  box-sizing: border-box;
+  font-family: Poppins, sans-serif;
+}
+
+header {
+  background-color: #f84453;
+  display: flex;
+}
+
+body {
+  background-color: #0f141b;
+}
+
+h2 {
+  margin-left: 1rem;
+  color: white;
+}
+
+h2 > a {
+  color: white;
+  text-decoration: none;
+}
+
+header > img {
+  padding-left: 1rem;
+}
+
+.fa-bars {
+  color: white;
+}
+
+.search-box {
+  border: none;
+  border-radius: 0.6em;
+  background-color: #5c5f74;
+  width: 80%;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3.5rem;
+  margin-left: 3rem;
+  margin-bottom: 3rem;
+}
+
+.red-box > img {
+  width: 55px;
+  height: 60px;
+  padding: 0.3rem;
+}
+
+.red-box {
+  background-color: #f84453;
+  width: 70px;
+  height: 70px;
+  border-radius: 0.5em;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 105px;
+  margin-bottom: 3rem;
+}
+
+.search-box-content > input,
+.search-box-content > button {
+  border-radius: 0.3em;
+  border: none;
+}
+
+.search-box-content > input {
+  padding: 6px 12px;
+  width: 200px;
+  height: 36px;
+}
+
+.search-box-content > button {
+  background-color: #f84453;
+  color: white;
+  margin-left: 0.5rem;
+  padding: 0;
+  width: 75px;
+  height: 36px;
+}
+
+.text {
+  color: white;
+  background-color: #f84453;
+  text-align: center;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+}
+
+.carousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #868686;
+}
+
+.carousel-container {
+  margin-top: 3rem;
+}
+
+.carousel-item > img {
+  width: 100%;
+  border-radius: 0.3em;
+  position: relative;
+  left: 8px;
+}
+
+.carousel-buttons {
+  background-color: #868686;
+  display: flex;
+  justify-content: center;
+}
+
+.circle-button {
+  border-radius: 50%;
+  border: none;
+  height: 1rem;
+  width: 1rem;
+  margin: 0.5rem 0.6rem 1.5rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.circle-button:active {
+  background-color: #f84453;
+}
+
+.button-right,
+.button-left {
+  background-color: #868686;
+  border: none;
+  height: 100%;
+  color: white;
+  margin-top: 1.5rem;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.button-left:active,
+.button-right:active {
+  color: #f84453;
+}
+
+.fa-chevron-left {
+  margin-left: 1rem;
+}
+
+.fa-chevron-right {
+  margin: 0 1rem;
+}
+
+.box > i {
+  font-size: 2rem;
+  padding: 1rem 0;
+  position: relative;
+  top: 5px;
+}
+
+.box {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.4em;
+  margin: 1rem 0 0 110px;
+}
+
+.box:active {
+  border: 1px solid rgba(255, 255, 255, 1);
+}
+
+.nav-search {
+  display: none;
+}
+
+header > h3 > a {
+  display: none;
+}
+
+.mobile-search {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.mobile-search > button {
+  margin-left: 0.6rem;
+  background-color: #f84453;
+  border-radius: 0.3em;
+  border: none;
+  color: white;
+  height: 36px;
+  width: 75px;
+}
+
+.mobile-search > input {
+  border: none;
+  border-radius: 0.3em;
+  width: 200px;
+  height: 36px;
+  padding: 0.4rem;
+}
+
+.dropdown-menu > h3 > a {
+  text-decoration: none;
+  color: black;
+}
+
+.dropdown-menu {
+  border: 1px white solid;
+  background-color: #d9d9d9;
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem 1rem;
+  text-align: end;
+}
+
+.dropdown-modal {
+  position: absolute;
+  top: 75px;
+  right: 0;
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dropdown-menu > a > i {
+  font-size: 1.3rem;
+  border: 1px solid black;
+  padding: 0.2rem 0.5rem;
+}
+
+.grey-page {
+  background-color: #5c5f74;
+  border-radius: 0.4rem 0.4rem 0 0;
+  height: 100%;
+  margin-top: 2rem;
+}
+
+.grey-page > div {
+  border-bottom: solid 2px #f84453;
+  margin-bottom: 3rem;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.agent-container,
+.map-container,
+.weapon-container {
+  width: 80%;
+  background-color: #bbb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem 3rem 4rem;
+  border-radius: 0.3em;
+}
+
+.agent-image-container,
+.map-image-container,
+.weapon-image-container {
+  background-color: #ddd;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  margin: 0 3rem 2rem;
+  padding: 0.5rem;
+  border-radius: 0.4em;
+}
+
+.agent-image,
+.map-image,
+.weapon-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0.3em;
+}
+
+.agent-name,
+.map-name,
+.weapon-name {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: left;
+  margin-top: 1.3rem;
+  margin-left: 5rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+@media only screen and (min-width: 768px) {
+  .dropdown {
+    display: none;
+  }
+
+  header > img {
+    width: 50px;
+    padding-bottom: 5px;
+    margin-left: 1rem;
+  }
+
+  header > h3 > a,
+  header > h3 > a > i {
+    display: flex;
+    text-decoration: none;
+    color: white;
+    font-weight: 400;
+    margin-left: 1rem;
+    position: relative;
+    top: 0.3rem;
+  }
+
+  header > h3 > a > i {
+    margin-right: 0.3rem;
+  }
+
+  .button-left:hover,
+  .button-right:hover {
+    color: #f84453;
+  }
+
+  .circle-button {
+    margin: 0.8rem 1rem 2rem;
+  }
+
+  .circle-button:hover {
+    background-color: #f84453;
+  }
+
+  .dropdown-modal {
+    display: none;
+  }
+
+  button:hover {
+    cursor: pointer;
+  }
+
+  .nav-search {
+    display: flex;
+    align-items: center;
+    position: relative;
+    left: 465px;
+  }
+
+  .nav-search > input,
+  .nav-search > button {
+    border: none;
+    border-radius: 0.3em;
+    margin-left: 0.8rem;
+    height: 36px;
+  }
+
+  .nav-search > button {
+    background-color: #f84453;
+    color: white;
+    border: solid 1px white;
+    width: 75px;
+  }
+
+  .nav-search > input {
+    width: 220px;
+    padding: 0.5rem;
+  }
+
+  .search-box {
+    width: 60%;
+    align-items: center;
+    margin-left: 310px;
+  }
+
+  .search-box-content > input {
+    width: 220px;
+  }
+
+  .carousel-item > img {
+    width: 80%;
+    margin-left: 165px;
+    left: 0;
+  }
+
+  .fa-chevron-left {
+    margin-left: 4rem;
+  }
+
+  .fa-chevron-right {
+    margin: 0 4rem;
+  }
+
+  .mobile-search {
+    display: none;
+  }
+
+  .grey-page {
+    margin-top: 0;
+    border-radius: 0;
+  }
+
+  .header {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-left: 2rem;
+    color: white;
+  }
+
+  .agent-container,
+  .map-container,
+  .weapon-container {
+    width: 26%;
+  }
+
+  #agents-list,
+  #maps-list,
+  #weapons-list {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+}
