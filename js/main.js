@@ -225,7 +225,6 @@ xhr.addEventListener('load', function () {
   }
 }
 );
-
 xhr.open('GET', 'https://valorant-api.com/v1/agents', true);
 xhr.send();
 
@@ -255,6 +254,12 @@ xhr2.addEventListener('load', function () {
     mapNameElement.innerText = mapName;
     mapNameElement.className = 'map-name';
 
+    var starButton = document.createElement('button');
+    starButton.className = 'star-button';
+
+    var starIcon = document.createElement('i');
+    starIcon.className = 'fa-solid fa-star';
+
     var mapContainer = document.createElement('div');
     mapContainer.className = 'map-container';
 
@@ -269,6 +274,8 @@ xhr2.addEventListener('load', function () {
     }
 
     mapContainer.appendChild(mapNameElement);
+    starButton.appendChild(starIcon);
+    mapContainer.appendChild(starButton);
     mapContainer.appendChild(mapImageContainer);
 
     document.getElementById('maps-list').appendChild(mapContainer);
@@ -298,6 +305,12 @@ xhr3.addEventListener('load', function () {
     weaponNameElement.innerText = weaponName;
     weaponNameElement.className = 'weapon-name';
 
+    var starButton = document.createElement('button');
+    starButton.className = 'star-button';
+
+    var starIcon = document.createElement('i');
+    starIcon.className = 'fa-solid fa-star';
+
     var weaponContainer = document.createElement('div');
     weaponContainer.className = 'weapon-container';
 
@@ -312,6 +325,8 @@ xhr3.addEventListener('load', function () {
     }
 
     weaponContainer.appendChild(weaponNameElement);
+    starButton.appendChild(starIcon);
+    weaponContainer.appendChild(starButton);
     weaponContainer.appendChild(weaponImageContainer);
 
     document.getElementById('weapons-list').appendChild(weaponContainer);
