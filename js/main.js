@@ -80,27 +80,39 @@ function viewSwap(viewName) {
   var agentsPage = document.querySelector('.agents');
   var mapsPage = document.querySelector('.maps');
   var weaponsPage = document.querySelector('.weapons');
+  var searchResults = document.querySelector('.search-results');
 
   if (viewName === 'home') {
     homePage.className = 'home';
     agentsPage.className = 'agents hidden';
     mapsPage.className = 'maps hidden';
     weaponsPage.className = 'weapons hidden';
+    searchResults.className = 'search-results hidden';
   } else if (viewName === 'agents') {
     homePage.className = 'home hidden';
     agentsPage.className = 'agents';
     mapsPage.className = 'maps hidden';
     weaponsPage.className = 'weapons hidden';
+    searchResults.className = 'search-results hidden';
   } else if (viewName === 'maps') {
     homePage.className = 'home hidden';
     agentsPage.className = 'agents hidden';
     mapsPage.className = 'maps';
     weaponsPage.className = 'weapons hidden';
+    searchResults.className = 'search-results hidden';
   } else if (viewName === 'weapons') {
     homePage.className = 'home hidden';
     agentsPage.className = 'agents hidden';
     mapsPage.className = 'maps hidden';
     weaponsPage.className = 'weapons';
+    searchResults.className = 'search-results hidden';
+  } else if (viewName === 'search-results') {
+    homePage.className = 'home hidden';
+    agentsPage.className = 'agents hidden';
+    mapsPage.className = 'maps hidden';
+    weaponsPage.className = 'weapons hidden';
+    searchResults.className = 'search-results';
+
   }
 }
 
@@ -109,6 +121,7 @@ var $homeTab = document.querySelector('.home-tab');
 var $agentsTab = document.querySelector('.agents-tab');
 var $mapsTab = document.querySelector('.maps-tab');
 var $weaponsTab = document.querySelector('.weapons-tab');
+var $searchButton = document.querySelector('.search-button');
 
 $homeTab.addEventListener('click', function () {
   viewSwap('home');
@@ -126,6 +139,10 @@ $mapsTab.addEventListener('click', function () {
 
 $weaponsTab.addEventListener('click', function () {
   viewSwap('weapons');
+});
+
+$searchButton.addEventListener('click', function () {
+  viewSwap('search-results');
 });
 
 var $agentsDrop = document.querySelector('.agents-drop');
@@ -203,12 +220,93 @@ xhr.onreadystatechange = function () {
 xhr.open('GET', 'https://valorant-api.com/v1/agents', true);
 xhr.send();
 
-// var starButton = document.createElement('button');
-// starButton.className = 'star-button';
+var xhr2 = new XMLHttpRequest();
+xhr2.onreadystatechange = function () {
+  if (this.readyState === 4 && this.status === 200) {
+    var maps = JSON.parse(this.responseText).data;
+    maps.sort(function (a, b) {
+      var nameA = a.displayName.toUpperCase();
+      var nameB = b.displayName.toUpperCase();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
 
-// var starIcon = document.createElement('i');
-// starIcon.className = 'fa-solid fa-star';
+    for (var i = 0; i < maps.length; i++) {
+      var map = maps[i];
+      var mapName = map.displayName;
+      var mapSplash = map.splash;
 
-// starButton.appendChild(starIcon);
+      var mapNameElement = document.createElement('p');
+      mapNameElement.innerText = mapName;
+      mapNameElement.className = 'map-name';
 
-// agentContainer.appendChild(starButton);
+      var mapContainer = document.createElement('div');
+      mapContainer.className = 'map-container';
+
+      var mapImageContainer = document.createElement('div');
+      mapImageContainer.className = 'map-image-container';
+
+      if (mapSplash) {
+        var mapImage = document.createElement('img');
+        mapImage.className = 'map-image';
+        mapImage.src = mapSplash;
+        mapImageContainer.appendChild(mapImage);
+      }
+
+      mapContainer.appendChild(mapNameElement);
+      mapContainer.appendChild(mapImageContainer);
+
+      document.getElementById('maps-list').appendChild(mapContainer);
+    }
+  }
+};
+xhr2.open('GET', 'https://valorant-api.com/v1/maps', true);
+xhr2.send();
+
+var xhr3 = new XMLHttpRequest();
+xhr3.onreadystatechange = function () {
+  if (this.readyState === 4 && this.status === 200) {
+    var weapons = JSON.parse(this.responseText).data;
+
+    weapons.sort(function (a, b) {
+      var costA = (a.shopData && a.shopData.cost) || 0;
+      var costB = (b.shopData && b.shopData.cost) || 0;
+      return costA - costB;
+    });
+
+    for (var i = 0; i < weapons.length; i++) {
+      var weapon = weapons[i];
+      var weaponName = weapon.displayName;
+      var weaponIcon = weapon.displayIcon;
+
+      var weaponNameElement = document.createElement('p');
+      weaponNameElement.innerText = weaponName;
+      weaponNameElement.className = 'weapon-name';
+
+      var weaponContainer = document.createElement('div');
+      weaponContainer.className = 'weapon-container';
+
+      var weaponImageContainer = document.createElement('div');
+      weaponImageContainer.className = 'weapon-image-container';
+
+      if (weaponIcon) {
+        var weaponImage = document.createElement('img');
+        weaponImage.className = 'weapon-image';
+        weaponImage.src = weaponIcon;
+        weaponImageContainer.appendChild(weaponImage);
+      }
+
+      weaponContainer.appendChild(weaponNameElement);
+      weaponContainer.appendChild(weaponImageContainer);
+
+      document.getElementById('weapons-list').appendChild(weaponContainer);
+    }
+  }
+};
+xhr3.open('GET', 'https://valorant-api.com/v1/weapons', true);
+xhr3.send();

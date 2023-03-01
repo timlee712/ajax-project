@@ -23,7 +23,7 @@
     <h3><a href="#" class="weapons-tab"><i class="fa-solid fa-gun"></i> Weapons</a></h3>
     <div class="nav-search">
       <input type="text" placeholder="Search">
-      <button type="submit">Search</button>
+      <button type="button" class="search-button">Search</button>
     </div>
     <div class="dropdown"><a href="#" class="box"><i class="fa-solid fa-bars"></i></a>
   </header>
@@ -46,9 +46,10 @@
             <img src="images/valorant-logo-white.svg" alt="valorant-logo">
           </div>
           <input type="text" placeholder="Search">
-          <button type="submit">Search</button>
+          <button type="button" class="search-button">Search</button>
         </div>
       </div>
+
       <div class="text">
         <p class="">
           Valorant is a 5v5 first-person tactical hero shooter developed and published by Riot Games.
@@ -60,6 +61,7 @@
           Valorant requires precise gunplay as well creativity in using the agent's abilities.
         </p>
       </div>
+
       <div class="carousel">
         <button class="button-right"><i class="fa-solid fa-chevron-left"></i></button>
 
@@ -74,7 +76,6 @@
             <img src="images/valorant-weapons.jpeg" alt="weapons">
           </div>
         </div>
-
         <button class="button-left"><i class="fa-solid fa-chevron-right"></i></i></button>
       </div>
       <div class="carousel-buttons">
@@ -83,10 +84,12 @@
         <button id="weapons-button" class="circle-button"></button>
       </div>
     </div>
+
+
     <div data-view="agents-page" class="agents hidden">
       <div class="mobile-search">
         <input type="text" placeholder="Search">
-        <button type="submit">Search</button>
+        <button type="button" class="search-button">Search</button>
       </div>
       <div class="grey-page">
         <div>
@@ -100,10 +103,12 @@
       </div>
 
     </div>
+
+
     <div data-view="maps-page" class="maps hidden">
       <div class="mobile-search">
         <input type="text" placeholder="Search">
-        <button type="submit">Search</button>
+        <button type="button" class="search-button">Search</button>
       </div>
       <div class="grey-page">
         <div>
@@ -111,13 +116,17 @@
             <h1>Maps</h1>
           </div>
         </div>
+        <div id="maps-list">
 
+        </div>
       </div>
     </div>
+
+
     <div data-view="weapons-page" class="weapons hidden">
       <div class="mobile-search">
         <input type="text" placeholder="Search">
-        <button type="submit">Search</button>
+        <button type="button" class="search-button">Search</button>
       </div>
       <div class="grey-page">
         <div>
@@ -125,9 +134,27 @@
             <h1>Weapons</h1>
           </div>
         </div>
+        <div id="weapons-list">
 
+        </div>
       </div>
     </div>
+
+    <div data-view="search-results" class="search-results">
+      <div class="mobile-search">
+        <input type="text" placeholder="Search">
+        <button type="button" class="search-button">Search</button>
+      </div>
+      <div class="grey-page">
+        <div>
+          <div class="header">
+            <h1>Search Results</h1>
+          </div>
+        </div>
+        <div id="search-list">
+
+        </div>
+      </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
