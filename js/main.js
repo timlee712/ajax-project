@@ -166,6 +166,7 @@ $weaponsDrop.addEventListener('click', function () {
 
 });
 
+// loop through agents to get their names and portraits
 var xhr = new XMLHttpRequest();
 xhr.addEventListener('load', function () {
 
@@ -199,6 +200,12 @@ xhr.addEventListener('load', function () {
     var agentContainer = document.createElement('div');
     agentContainer.className = 'agent-container';
 
+    var starButton = document.createElement('button');
+    starButton.className = 'star-button';
+
+    var starIcon = document.createElement('i');
+    starIcon.className = 'fa-solid fa-star';
+
     var agentImageContainer = document.createElement('div');
     agentImageContainer.className = 'agent-image-container';
 
@@ -210,6 +217,8 @@ xhr.addEventListener('load', function () {
     }
 
     agentContainer.appendChild(agentNameElement);
+    starButton.appendChild(starIcon);
+    agentContainer.appendChild(starButton);
     agentContainer.appendChild(agentImageContainer);
 
     document.getElementById('agents-list').appendChild(agentContainer);
@@ -220,6 +229,7 @@ xhr.addEventListener('load', function () {
 xhr.open('GET', 'https://valorant-api.com/v1/agents', true);
 xhr.send();
 
+// loop through maps to get their names and splashe images
 var xhr2 = new XMLHttpRequest();
 xhr2.addEventListener('load', function () {
 
@@ -268,6 +278,7 @@ xhr2.addEventListener('load', function () {
 xhr2.open('GET', 'https://valorant-api.com/v1/maps', true);
 xhr2.send();
 
+// loop through weapons to get their names and weapon images
 var xhr3 = new XMLHttpRequest();
 xhr3.addEventListener('load', function () {
   var weapons = JSON.parse(this.responseText).data;
@@ -309,3 +320,40 @@ xhr3.addEventListener('load', function () {
 );
 xhr3.open('GET', 'https://valorant-api.com/v1/weapons', true);
 xhr3.send();
+
+// Search bar
+var searchInput = document.querySelector('input[type="text"]');
+var searchButton = document.querySelector('input[type="button"]');
+var searchResults = document.querySelector('.search-results');
+
+var xhr4 = new XMLHttpRequest();
+searchButton.addEventListener('click', function () {
+  var searchQuery = searchInput.value;
+
+  xhr4.open('GET', `https://valorant-api.com/v1/agents?displayName=${searchQuery}`);
+  xhr4.send();
+
+  xhr4.addEventListener('load', function () {
+    var agents = JSON.parse(this.responseText).data;
+
+    var agentElements = agents.map(function (agent) {
+      var agentLink = document.createElement('a');
+      agentLink.href = '#';
+      agentLink.innerHTML = agent.displayName;
+      agentLink.addEventListener('click', function () {
+        viewSwap(`https://valorant-api.com/v1/agents/${agent.uuid}`);
+      });
+
+      var agentName = document.createElement('p');
+      agentName.innerHTML = agent.displayName;
+
+      return [agentLink, agentName];
+    });
+
+    searchResults.innerHTML = '';
+    agentElements.forEach(function (agentElement) {
+      searchResults.appendChild(agentElement[0]);
+      searchResults.appendChild(agentElement[1]);
+    });
+  });
+});

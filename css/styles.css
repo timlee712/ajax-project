@@ -299,6 +299,21 @@ header > h3 > a {
   width: 100%;
   display: flex;
   align-items: center;
+  margin-bottom: 0;
+}
+
+.star-button {
+  background-color: #bbb;
+  font-size: 1.5rem;
+  border: none;
+  color: rgba(0, 0, 0, 0.5);
+  position: relative;
+  left: 135px;
+  bottom: 35px;
+}
+
+.favorite: {
+  color: #fdd663;
 }
 
 @media only screen and (min-width: 768px) {
@@ -428,5 +443,9 @@ header > h3 > a {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+  }
+
+  .star-button {
+    left: 145px;
   }
 }
