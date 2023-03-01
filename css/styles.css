@@ -123,6 +123,11 @@ header > img {
   width: 1rem;
   margin: 0.5rem 0.6rem 1.5rem;
   cursor: pointer;
+  transition: 0.3s;
+}
+
+.circle-button:active {
+  background-color: #f84453;
 }
 
 .button-right,
@@ -134,7 +139,7 @@ header > img {
   margin-top: 1.5rem;
   font-size: 2rem;
   cursor: pointer;
-  transition: none;
+  transition: 0.4s;
 }
 
 .button-left:active,
@@ -327,6 +332,14 @@ header > h3 > a {
     color: #f84453;
   }
 
+  .circle-button {
+    margin: 0.8rem 1rem 2rem;
+  }
+
+  .circle-button:hover {
+    background-color: #f84453;
+  }
+
   .dropdown-modal {
     display: none;
   }
@@ -384,10 +397,6 @@ header > h3 > a {
 
   .fa-chevron-right {
     margin: 0 4rem;
-  }
-
-  .circle-button {
-    margin: 0.8rem 1rem 2rem;
   }
 
   .mobile-search {
