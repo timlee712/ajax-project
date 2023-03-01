@@ -229,6 +229,24 @@ header > h3 > a {
   padding: 0.2rem 0.5rem;
 }
 
+.grey-page {
+  background-color: #5c5f74;
+  border-radius: 0.4rem 0.4rem 0 0;
+  height: 100vh;
+  margin-top: 2rem;
+}
+
+.grey-page > div {
+  border-bottom: solid 2px #f84453;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
 @media only screen and (min-width: 768px) {
   .dropdown {
     display: none;
@@ -320,5 +338,18 @@ header > h3 > a {
 
   .mobile-search {
     display: none;
+  }
+
+  .grey-page {
+    margin-top: 0;
+    border-radius: 0;
+  }
+
+  .header {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-left: 2rem;
+    color: white;
   }
 }

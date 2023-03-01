@@ -148,3 +148,18 @@ $weaponsDrop.addEventListener('click', function () {
   $dropdownModal.className = 'dropdown-menu hidden';
 
 });
+
+// API Reqeust for all Agents
+var agentsList = document.querySelector('#agents-list');
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'https://valorant-api.com/v1/agents');
+xhr.responseType = 'json';
+xhr.addEventListener('load', function () {
+  // console.log('xhr.response', xhr.response);
+  for (var i = 0; i < xhr.response.length; i++) {
+    var li = document.createElement('li');
+    li.textContent = xhr.response[i].displayName;
+    agentsList.appendChild(li);
+  }
+});
+xhr.send();
