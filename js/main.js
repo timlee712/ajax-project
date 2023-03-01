@@ -149,17 +149,55 @@ $weaponsDrop.addEventListener('click', function () {
 
 });
 
-// API Reqeust for all Agents
-var agentsList = document.querySelector('#agents-list');
 var xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://valorant-api.com/v1/agents');
-xhr.responseType = 'json';
-xhr.addEventListener('load', function () {
-  // console.log('xhr.response', xhr.response);
-  for (var i = 0; i < xhr.response.length; i++) {
-    var li = document.createElement('li');
-    li.textContent = xhr.response[i].displayName;
-    agentsList.appendChild(li);
+xhr.onreadystatechange = function () {
+  if (this.readyState === 4 && this.status === 200) {
+    var agents = JSON.parse(this.responseText).data;
+
+    for (var i = 0; i < agents.length; i++) {
+      var agent = agents[i];
+      var agentName = agent.displayName;
+      var agentPortrait = agent.fullPortrait;
+
+      // to get rid of the duplicate Sova
+      if (agentName === 'Sova' && agent.isPlayableCharacter !== true) {
+        continue;
+      }
+
+      var agentNameElement = document.createElement('p');
+      agentNameElement.innerText = agentName;
+      agentNameElement.className = 'agent-name';
+
+      var agentContainer = document.createElement('div');
+      agentContainer.className = 'agent-container';
+
+      var agentImageContainer = document.createElement('div');
+      agentImageContainer.className = 'agent-image-container';
+
+      if (agentPortrait) {
+        var agentImage = document.createElement('img');
+        agentImage.className = 'agent-image';
+        agentImage.src = agentPortrait;
+        agentImageContainer.appendChild(agentImage);
+      }
+
+      agentContainer.appendChild(agentNameElement);
+
+      // var starButton = document.createElement('button');
+      // starButton.className = 'star-button';
+
+      // var starIcon = document.createElement('i');
+      // starIcon.className = 'fa-solid fa-star';
+
+      // starButton.appendChild(starIcon);
+
+      // agentContainer.appendChild(starButton);
+      agentContainer.appendChild(agentImageContainer);
+
+      document.getElementById('agents-list').appendChild(agentContainer);
+    }
   }
-});
+};
+
+xhr.open('GET', 'https://valorant-api.com/v1/agents', true);
 xhr.send();
