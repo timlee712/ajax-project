@@ -203,6 +203,10 @@ xhr.addEventListener('load', function () {
     var starButton = document.createElement('button');
     starButton.className = 'star-button';
 
+    starButton.addEventListener('click', function () {
+      this.classList.toggle('favorite');
+    });
+
     var starIcon = document.createElement('i');
     starIcon.className = 'fa-solid fa-star';
 
@@ -257,6 +261,10 @@ xhr2.addEventListener('load', function () {
     var starButton = document.createElement('button');
     starButton.className = 'star-button';
 
+    starButton.addEventListener('click', function () {
+      this.classList.toggle('favorite');
+    });
+
     var starIcon = document.createElement('i');
     starIcon.className = 'fa-solid fa-star';
 
@@ -307,6 +315,10 @@ xhr3.addEventListener('load', function () {
 
     var starButton = document.createElement('button');
     starButton.className = 'star-button';
+
+    starButton.addEventListener('click', function () {
+      this.classList.toggle('favorite');
+    });
 
     var starIcon = document.createElement('i');
     starIcon.className = 'fa-solid fa-star';
