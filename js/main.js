@@ -153,6 +153,17 @@ var xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function () {
   if (this.readyState === 4 && this.status === 200) {
     var agents = JSON.parse(this.responseText).data;
+    agents.sort(function (a, b) {
+      var nameA = a.displayName.toUpperCase();
+      var nameB = b.displayName.toUpperCase();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
 
     for (var i = 0; i < agents.length; i++) {
       var agent = agents[i];
@@ -182,16 +193,6 @@ xhr.onreadystatechange = function () {
       }
 
       agentContainer.appendChild(agentNameElement);
-
-      // var starButton = document.createElement('button');
-      // starButton.className = 'star-button';
-
-      // var starIcon = document.createElement('i');
-      // starIcon.className = 'fa-solid fa-star';
-
-      // starButton.appendChild(starIcon);
-
-      // agentContainer.appendChild(starButton);
       agentContainer.appendChild(agentImageContainer);
 
       document.getElementById('agents-list').appendChild(agentContainer);
@@ -201,3 +202,13 @@ xhr.onreadystatechange = function () {
 
 xhr.open('GET', 'https://valorant-api.com/v1/agents', true);
 xhr.send();
+
+// var starButton = document.createElement('button');
+// starButton.className = 'star-button';
+
+// var starIcon = document.createElement('i');
+// starIcon.className = 'fa-solid fa-star';
+
+// starButton.appendChild(starIcon);
+
+// agentContainer.appendChild(starButton);
