@@ -168,145 +168,144 @@ $weaponsDrop.addEventListener('click', function () {
 
 var xhr = new XMLHttpRequest();
 xhr.addEventListener('load', function () {
-  if (this.readyState === 4 && this.status === 200) {
-    var agents = JSON.parse(this.responseText).data;
-    agents.sort(function (a, b) {
-      var nameA = a.displayName.toUpperCase();
-      var nameB = b.displayName.toUpperCase();
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-      return 0;
-    });
 
-    for (var i = 0; i < agents.length; i++) {
-      var agent = agents[i];
-      var agentName = agent.displayName;
-      var agentPortrait = agent.fullPortrait;
-
-      // to get rid of the duplicate Sova
-      if (agentName === 'Sova' && agent.isPlayableCharacter !== true) {
-        continue;
-      }
-
-      var agentNameElement = document.createElement('p');
-      agentNameElement.innerText = agentName;
-      agentNameElement.className = 'agent-name';
-
-      var agentContainer = document.createElement('div');
-      agentContainer.className = 'agent-container';
-
-      var agentImageContainer = document.createElement('div');
-      agentImageContainer.className = 'agent-image-container';
-
-      if (agentPortrait) {
-        var agentImage = document.createElement('img');
-        agentImage.className = 'agent-image';
-        agentImage.src = agentPortrait;
-        agentImageContainer.appendChild(agentImage);
-      }
-
-      agentContainer.appendChild(agentNameElement);
-      agentContainer.appendChild(agentImageContainer);
-
-      document.getElementById('agents-list').appendChild(agentContainer);
+  var agents = JSON.parse(this.responseText).data;
+  agents.sort(function (a, b) {
+    var nameA = a.displayName.toUpperCase();
+    var nameB = b.displayName.toUpperCase();
+    if (nameA < nameB) {
+      return -1;
     }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  });
+
+  for (var i = 0; i < agents.length; i++) {
+    var agent = agents[i];
+    var agentName = agent.displayName;
+    var agentPortrait = agent.fullPortrait;
+
+    // to get rid of the duplicate Sova
+    if (agentName === 'Sova' && agent.isPlayableCharacter !== true) {
+      continue;
+    }
+
+    var agentNameElement = document.createElement('p');
+    agentNameElement.innerText = agentName;
+    agentNameElement.className = 'agent-name';
+
+    var agentContainer = document.createElement('div');
+    agentContainer.className = 'agent-container';
+
+    var agentImageContainer = document.createElement('div');
+    agentImageContainer.className = 'agent-image-container';
+
+    if (agentPortrait) {
+      var agentImage = document.createElement('img');
+      agentImage.className = 'agent-image';
+      agentImage.src = agentPortrait;
+      agentImageContainer.appendChild(agentImage);
+    }
+
+    agentContainer.appendChild(agentNameElement);
+    agentContainer.appendChild(agentImageContainer);
+
+    document.getElementById('agents-list').appendChild(agentContainer);
   }
-});
+}
+);
 
 xhr.open('GET', 'https://valorant-api.com/v1/agents', true);
 xhr.send();
 
 var xhr2 = new XMLHttpRequest();
 xhr2.addEventListener('load', function () {
-  if (this.readyState === 4 && this.status === 200) {
-    var maps = JSON.parse(this.responseText).data;
-    maps.sort(function (a, b) {
-      var nameA = a.displayName.toUpperCase();
-      var nameB = b.displayName.toUpperCase();
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-      return 0;
-    });
 
-    for (var i = 0; i < maps.length; i++) {
-      var map = maps[i];
-      var mapName = map.displayName;
-      var mapSplash = map.splash;
-
-      var mapNameElement = document.createElement('p');
-      mapNameElement.innerText = mapName;
-      mapNameElement.className = 'map-name';
-
-      var mapContainer = document.createElement('div');
-      mapContainer.className = 'map-container';
-
-      var mapImageContainer = document.createElement('div');
-      mapImageContainer.className = 'map-image-container';
-
-      if (mapSplash) {
-        var mapImage = document.createElement('img');
-        mapImage.className = 'map-image';
-        mapImage.src = mapSplash;
-        mapImageContainer.appendChild(mapImage);
-      }
-
-      mapContainer.appendChild(mapNameElement);
-      mapContainer.appendChild(mapImageContainer);
-
-      document.getElementById('maps-list').appendChild(mapContainer);
+  var maps = JSON.parse(this.responseText).data;
+  maps.sort(function (a, b) {
+    var nameA = a.displayName.toUpperCase();
+    var nameB = b.displayName.toUpperCase();
+    if (nameA < nameB) {
+      return -1;
     }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  });
+
+  for (var i = 0; i < maps.length; i++) {
+    var map = maps[i];
+    var mapName = map.displayName;
+    var mapSplash = map.splash;
+
+    var mapNameElement = document.createElement('p');
+    mapNameElement.innerText = mapName;
+    mapNameElement.className = 'map-name';
+
+    var mapContainer = document.createElement('div');
+    mapContainer.className = 'map-container';
+
+    var mapImageContainer = document.createElement('div');
+    mapImageContainer.className = 'map-image-container';
+
+    if (mapSplash) {
+      var mapImage = document.createElement('img');
+      mapImage.className = 'map-image';
+      mapImage.src = mapSplash;
+      mapImageContainer.appendChild(mapImage);
+    }
+
+    mapContainer.appendChild(mapNameElement);
+    mapContainer.appendChild(mapImageContainer);
+
+    document.getElementById('maps-list').appendChild(mapContainer);
   }
-});
+}
+);
 xhr2.open('GET', 'https://valorant-api.com/v1/maps', true);
 xhr2.send();
 
 var xhr3 = new XMLHttpRequest();
 xhr3.addEventListener('load', function () {
-  if (this.readyState === 4 && this.status === 200) {
-    var weapons = JSON.parse(this.responseText).data;
+  var weapons = JSON.parse(this.responseText).data;
 
-    weapons.sort(function (a, b) {
-      var costA = (a.shopData && a.shopData.cost) || 0;
-      var costB = (b.shopData && b.shopData.cost) || 0;
-      return costA - costB;
-    });
+  weapons.sort(function (a, b) {
+    var costA = (a.shopData && a.shopData.cost) || 0;
+    var costB = (b.shopData && b.shopData.cost) || 0;
+    return costA - costB;
+  });
 
-    for (var i = 0; i < weapons.length; i++) {
-      var weapon = weapons[i];
-      var weaponName = weapon.displayName;
-      var weaponIcon = weapon.displayIcon;
+  for (var i = 0; i < weapons.length; i++) {
+    var weapon = weapons[i];
+    var weaponName = weapon.displayName;
+    var weaponIcon = weapon.displayIcon;
 
-      var weaponNameElement = document.createElement('p');
-      weaponNameElement.innerText = weaponName;
-      weaponNameElement.className = 'weapon-name';
+    var weaponNameElement = document.createElement('p');
+    weaponNameElement.innerText = weaponName;
+    weaponNameElement.className = 'weapon-name';
 
-      var weaponContainer = document.createElement('div');
-      weaponContainer.className = 'weapon-container';
+    var weaponContainer = document.createElement('div');
+    weaponContainer.className = 'weapon-container';
 
-      var weaponImageContainer = document.createElement('div');
-      weaponImageContainer.className = 'weapon-image-container';
+    var weaponImageContainer = document.createElement('div');
+    weaponImageContainer.className = 'weapon-image-container';
 
-      if (weaponIcon) {
-        var weaponImage = document.createElement('img');
-        weaponImage.className = 'weapon-image';
-        weaponImage.src = weaponIcon;
-        weaponImageContainer.appendChild(weaponImage);
-      }
-
-      weaponContainer.appendChild(weaponNameElement);
-      weaponContainer.appendChild(weaponImageContainer);
-
-      document.getElementById('weapons-list').appendChild(weaponContainer);
+    if (weaponIcon) {
+      var weaponImage = document.createElement('img');
+      weaponImage.className = 'weapon-image';
+      weaponImage.src = weaponIcon;
+      weaponImageContainer.appendChild(weaponImage);
     }
+
+    weaponContainer.appendChild(weaponNameElement);
+    weaponContainer.appendChild(weaponImageContainer);
+
+    document.getElementById('weapons-list').appendChild(weaponContainer);
   }
-});
+}
+);
 xhr3.open('GET', 'https://valorant-api.com/v1/weapons', true);
 xhr3.send();
