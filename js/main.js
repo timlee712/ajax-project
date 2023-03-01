@@ -167,7 +167,7 @@ $weaponsDrop.addEventListener('click', function () {
 });
 
 var xhr = new XMLHttpRequest();
-xhr.onreadystatechange = function () {
+xhr.addEventListener('load', function () {
   if (this.readyState === 4 && this.status === 200) {
     var agents = JSON.parse(this.responseText).data;
     agents.sort(function (a, b) {
@@ -215,13 +215,13 @@ xhr.onreadystatechange = function () {
       document.getElementById('agents-list').appendChild(agentContainer);
     }
   }
-};
+});
 
 xhr.open('GET', 'https://valorant-api.com/v1/agents', true);
 xhr.send();
 
 var xhr2 = new XMLHttpRequest();
-xhr2.onreadystatechange = function () {
+xhr2.addEventListener('load', function () {
   if (this.readyState === 4 && this.status === 200) {
     var maps = JSON.parse(this.responseText).data;
     maps.sort(function (a, b) {
@@ -264,12 +264,12 @@ xhr2.onreadystatechange = function () {
       document.getElementById('maps-list').appendChild(mapContainer);
     }
   }
-};
+});
 xhr2.open('GET', 'https://valorant-api.com/v1/maps', true);
 xhr2.send();
 
 var xhr3 = new XMLHttpRequest();
-xhr3.onreadystatechange = function () {
+xhr3.addEventListener('load', function () {
   if (this.readyState === 4 && this.status === 200) {
     var weapons = JSON.parse(this.responseText).data;
 
@@ -307,6 +307,6 @@ xhr3.onreadystatechange = function () {
       document.getElementById('weapons-list').appendChild(weaponContainer);
     }
   }
-};
+});
 xhr3.open('GET', 'https://valorant-api.com/v1/weapons', true);
 xhr3.send();

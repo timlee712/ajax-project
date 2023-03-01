@@ -134,10 +134,11 @@ header > img {
   margin-top: 1.5rem;
   font-size: 2rem;
   cursor: pointer;
+  transition: none;
 }
 
-.button-left:hover,
-.button-right:hover {
+.button-left:active,
+.button-right:active {
   color: #f84453;
 }
 
@@ -319,6 +320,11 @@ header > h3 > a {
 
   header > h3 > a > i {
     margin-right: 0.3rem;
+  }
+
+  .button-left:hover,
+  .button-right:hover {
+    color: #f84453;
   }
 
   .dropdown-modal {
