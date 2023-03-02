@@ -418,6 +418,7 @@ searchButtons.forEach(function (button) {
         viewSwap('search-results');
         searchInput.value = '';
         searchInput.placeholder = 'Search';
+        $dropdownModal.classList.add('hidden');
       } else {
         searchResultsDiv.innerHTML = '';
         searchResultsDiv.classList.add('hidden');
