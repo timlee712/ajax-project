@@ -175,31 +175,24 @@ input.addEventListener('keypress', function (event) {
   }
 });
 
+// arrays for favorited agents, maps, and weapons
+var favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+var agents = [];
+var maps = [];
+var weapons = [];
+
 // loop through agents to get their names and portraits
-var xhr = new XMLHttpRequest();
-xhr.addEventListener('load', function () {
-  var agents = JSON.parse(this.responseText).data;
+function renderAgents() {
+  var agentList = document.getElementById('agents-list');
+  agentList.innerHTML = '';
 
-  agents.sort(function (a, b) {
-    var nameA = a.displayName.toUpperCase();
-    var nameB = b.displayName.toUpperCase();
-    if (nameA < nameB) {
-      return -1;
-    }
-    if (nameA > nameB) {
-      return 1;
-    }
-    return 0;
-  });
-
-  for (var i = 0; i < agents.length; i++) {
-    var agent = agents[i];
+  agents.forEach(function (agent) {
     var agentName = agent.displayName;
     var agentPortrait = agent.fullPortrait;
 
     // to get rid of the duplicate Sova
     if (agentName === 'Sova' && agent.isPlayableCharacter !== true) {
-      continue;
+      return;
     }
 
     var agentNameElement = document.createElement('p');
@@ -212,15 +205,31 @@ xhr.addEventListener('load', function () {
     var starButton = document.createElement('button');
     starButton.className = 'star-button';
 
+    var isFavorite = favorites.some(function (favorite) {
+      return favorite.displayName === agentName;
+    });
+
+    if (isFavorite) {
+      starButton.classList.add('favorite');
+      agentContainer.style.order = -1;
+    }
+
     starButton.addEventListener('click', function () {
-      var favoriteClass = 'favorite';
-      var parentElement = this.parentElement;
-      if (this.classList.contains(favoriteClass)) {
-        parentElement.style.order = '';
+      var favoriteIndex = favorites.findIndex(function (favorite) {
+        return favorite.displayName === agentName;
+      });
+
+      if (favoriteIndex === -1) {
+        favorites.unshift(agent);
+        this.classList.add('favorite');
+        agentContainer.style.order = -1;
       } else {
-        parentElement.style.order = -1;
+        favorites.splice(favoriteIndex, 1);
+        this.classList.remove('favorite');
+        agentContainer.style.order = '';
       }
-      this.classList.toggle(favoriteClass);
+
+      localStorage.setItem('favorites', JSON.stringify(favorites));
     });
 
     var starIcon = document.createElement('i');
@@ -231,6 +240,7 @@ xhr.addEventListener('load', function () {
 
     if (agentPortrait) {
       var agentImage = document.createElement('img');
+      agentImage.setAttribute('alt', agentName);
       agentImage.className = 'agent-image';
       agentImage.src = agentPortrait;
       agentImageContainer.appendChild(agentImage);
@@ -241,31 +251,40 @@ xhr.addEventListener('load', function () {
     agentContainer.appendChild(starButton);
     agentContainer.appendChild(agentImageContainer);
 
-    document.getElementById('agents-list').appendChild(agentContainer);
-  }
-});
-xhr.open('GET', 'https://valorant-api.com/v1/agents', true);
-xhr.send();
+    agentList.appendChild(agentContainer);
+  });
+}
+
+function loadAgents() {
+  var xhr = new XMLHttpRequest();
+  xhr.addEventListener('load', function () {
+    agents = JSON.parse(this.responseText).data;
+    agents.sort(function (a, b) {
+      var nameA = a.displayName.toUpperCase();
+      var nameB = b.displayName.toUpperCase();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+
+    renderAgents();
+  });
+  xhr.open('GET', 'https://valorant-api.com/v1/agents', true);
+  xhr.send();
+}
+
+loadAgents();
 
 // loop through maps to get their names and splashe images
-var xhr2 = new XMLHttpRequest();
-xhr2.addEventListener('load', function () {
+function renderMaps() {
+  var mapList = document.getElementById('maps-list');
+  mapList.innerHTML = '';
 
-  var maps = JSON.parse(this.responseText).data;
-  maps.sort(function (a, b) {
-    var nameA = a.displayName.toUpperCase();
-    var nameB = b.displayName.toUpperCase();
-    if (nameA < nameB) {
-      return -1;
-    }
-    if (nameA > nameB) {
-      return 1;
-    }
-    return 0;
-  });
-
-  for (var i = 0; i < maps.length; i++) {
-    var map = maps[i];
+  maps.forEach(function (map) {
     var mapName = map.displayName;
     var mapSplash = map.splash;
 
@@ -273,31 +292,48 @@ xhr2.addEventListener('load', function () {
     mapNameElement.innerText = mapName;
     mapNameElement.className = 'map-name';
 
+    var mapContainer = document.createElement('div');
+    mapContainer.className = 'map-container';
+
     var starButton = document.createElement('button');
     starButton.className = 'star-button';
 
+    var isFavorite = favorites.some(function (favorite) {
+      return favorite.displayName === mapName;
+    });
+
+    if (isFavorite) {
+      starButton.classList.add('favorite');
+      mapContainer.style.order = -1;
+    }
+
     starButton.addEventListener('click', function () {
-      var favoriteClass = 'favorite';
-      var parentElement = this.parentElement;
-      if (this.classList.contains(favoriteClass)) {
-        parentElement.style.order = '';
+      var favoriteIndex = favorites.findIndex(function (favorite) {
+        return favorite.displayName === mapName;
+      });
+
+      if (favoriteIndex === -1) {
+        favorites.unshift(map);
+        this.classList.add('favorite');
+        mapContainer.style.order = -1;
       } else {
-        parentElement.style.order = -1;
+        favorites.splice(favoriteIndex, 1);
+        this.classList.remove('favorite');
+        mapContainer.style.order = '';
       }
-      this.classList.toggle(favoriteClass);
+
+      localStorage.setItem('favorites', JSON.stringify(favorites));
     });
 
     var starIcon = document.createElement('i');
     starIcon.className = 'fa-solid fa-star';
-
-    var mapContainer = document.createElement('div');
-    mapContainer.className = 'map-container';
 
     var mapImageContainer = document.createElement('div');
     mapImageContainer.className = 'map-image-container';
 
     if (mapSplash) {
       var mapImage = document.createElement('img');
+      mapImage.setAttribute('alt', mapName);
       mapImage.className = 'map-image';
       mapImage.src = mapSplash;
       mapImageContainer.appendChild(mapImage);
@@ -308,26 +344,103 @@ xhr2.addEventListener('load', function () {
     mapContainer.appendChild(starButton);
     mapContainer.appendChild(mapImageContainer);
 
-    document.getElementById('maps-list').appendChild(mapContainer);
-  }
+    mapList.appendChild(mapContainer);
+  });
 }
-);
-xhr2.open('GET', 'https://valorant-api.com/v1/maps', true);
-xhr2.send();
+
+function loadMaps() {
+  var xhr = new XMLHttpRequest();
+  xhr.addEventListener('load', function () {
+    maps = JSON.parse(this.responseText).data;
+    maps.sort(function (a, b) {
+      var nameA = a.displayName.toUpperCase();
+      var nameB = b.displayName.toUpperCase();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+
+    renderMaps();
+  });
+  xhr.open('GET', 'https://valorant-api.com/v1/maps', true);
+  xhr.send();
+}
+
+loadMaps();
 
 // loop through weapons to get their names and weapon images
-var xhr3 = new XMLHttpRequest();
-xhr3.addEventListener('load', function () {
-  var weapons = JSON.parse(this.responseText).data;
+// var xhr3 = new XMLHttpRequest();
+// xhr3.addEventListener('load', function () {
+//   var weapons = JSON.parse(this.responseText).data;
 
-  weapons.sort(function (a, b) {
-    var costA = (a.shopData && a.shopData.cost) || 0;
-    var costB = (b.shopData && b.shopData.cost) || 0;
-    return costA - costB;
-  });
+//   weapons.sort(function (a, b) {
+//     var costA = (a.shopData && a.shopData.cost) || 0;
+//     var costB = (b.shopData && b.shopData.cost) || 0;
+//     return costA - costB;
+//   });
 
-  for (var i = 0; i < weapons.length; i++) {
-    var weapon = weapons[i];
+//   for (var i = 0; i < weapons.length; i++) {
+//     var weapon = weapons[i];
+//     var weaponName = weapon.displayName;
+//     var weaponIcon = weapon.displayIcon;
+
+//     var weaponNameElement = document.createElement('p');
+//     weaponNameElement.innerText = weaponName;
+//     weaponNameElement.className = 'weapon-name';
+
+//     var starButton = document.createElement('button');
+//     starButton.className = 'star-button';
+
+//     starButton.addEventListener('click', function () {
+//       var favoriteClass = 'favorite';
+//       var parentElement = this.parentElement;
+//       if (this.classList.contains(favoriteClass)) {
+//         parentElement.style.order = '';
+//       } else {
+//         parentElement.style.order = -1;
+//       }
+//       this.classList.toggle(favoriteClass);
+
+//     });
+
+//     var starIcon = document.createElement('i');
+//     starIcon.className = 'fa-solid fa-star';
+
+//     var weaponContainer = document.createElement('div');
+//     weaponContainer.className = 'weapon-container';
+
+//     var weaponImageContainer = document.createElement('div');
+//     weaponImageContainer.className = 'weapon-image-container';
+
+//     if (weaponIcon) {
+//       var weaponImage = document.createElement('img');
+//       weaponImage.setAttribute('alt', weaponName);
+//       weaponImage.className = 'weapon-image';
+//       weaponImage.src = weaponIcon;
+//       weaponImageContainer.appendChild(weaponImage);
+//     }
+
+//     weaponContainer.appendChild(weaponNameElement);
+//     starButton.appendChild(starIcon);
+//     weaponContainer.appendChild(starButton);
+//     weaponContainer.appendChild(weaponImageContainer);
+
+//     document.getElementById('weapons-list').appendChild(weaponContainer);
+//   }
+// }
+
+// );
+// xhr3.open('GET', 'https://valorant-api.com/v1/weapons', true);
+// xhr3.send();
+function renderWeapons() {
+  var weaponList = document.getElementById('weapons-list');
+  weaponList.innerHTML = '';
+
+  weapons.forEach(function (weapon) {
     var weaponName = weapon.displayName;
     var weaponIcon = weapon.displayIcon;
 
@@ -335,31 +448,48 @@ xhr3.addEventListener('load', function () {
     weaponNameElement.innerText = weaponName;
     weaponNameElement.className = 'weapon-name';
 
+    var weaponContainer = document.createElement('div');
+    weaponContainer.className = 'weapon-container';
+
     var starButton = document.createElement('button');
     starButton.className = 'star-button';
 
+    var isFavorite = favorites.some(function (favorite) {
+      return favorite.displayName === weaponName;
+    });
+
+    if (isFavorite) {
+      starButton.classList.add('favorite');
+      weaponContainer.style.order = -1;
+    }
+
     starButton.addEventListener('click', function () {
-      var favoriteClass = 'favorite';
-      var parentElement = this.parentElement;
-      if (this.classList.contains(favoriteClass)) {
-        parentElement.style.order = '';
+      var favoriteIndex = favorites.findIndex(function (favorite) {
+        return favorite.displayName === weaponName;
+      });
+
+      if (favoriteIndex === -1) {
+        favorites.unshift(weapon);
+        this.classList.add('favorite');
+        weaponContainer.style.order = -1;
       } else {
-        parentElement.style.order = -1;
+        favorites.splice(favoriteIndex, 1);
+        this.classList.remove('favorite');
+        weaponContainer.style.order = '';
       }
-      this.classList.toggle(favoriteClass);
+
+      localStorage.setItem('favorites', JSON.stringify(favorites));
     });
 
     var starIcon = document.createElement('i');
     starIcon.className = 'fa-solid fa-star';
-
-    var weaponContainer = document.createElement('div');
-    weaponContainer.className = 'weapon-container';
 
     var weaponImageContainer = document.createElement('div');
     weaponImageContainer.className = 'weapon-image-container';
 
     if (weaponIcon) {
       var weaponImage = document.createElement('img');
+      weaponImage.setAttribute('alt', weaponName);
       weaponImage.className = 'weapon-image';
       weaponImage.src = weaponIcon;
       weaponImageContainer.appendChild(weaponImage);
@@ -370,13 +500,27 @@ xhr3.addEventListener('load', function () {
     weaponContainer.appendChild(starButton);
     weaponContainer.appendChild(weaponImageContainer);
 
-    document.getElementById('weapons-list').appendChild(weaponContainer);
-  }
+    weaponList.appendChild(weaponContainer);
+  });
 }
-);
-xhr3.open('GET', 'https://valorant-api.com/v1/weapons', true);
-xhr3.send();
 
+function loadWeapons() {
+  var xhr = new XMLHttpRequest();
+  xhr.addEventListener('load', function () {
+    weapons = JSON.parse(this.responseText).data;
+    weapons.sort(function (a, b) {
+      var costA = (a.shopData && a.shopData.cost) || 0;
+      var costB = (b.shopData && b.shopData.cost) || 0;
+      return costA - costB;
+    });
+
+    renderWeapons();
+  });
+  xhr.open('GET', 'https://valorant-api.com/v1/weapons', true);
+  xhr.send();
+}
+
+loadWeapons();
 // search bar
 
 var searchButtons = document.querySelectorAll('.search-button');
