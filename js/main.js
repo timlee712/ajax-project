@@ -166,11 +166,21 @@ $weaponsDrop.addEventListener('click', function () {
 
 });
 
+// triggering a button click on enter
+var input = document.querySelector('.search-input');
+input.addEventListener('keypress', function (event) {
+  if (event.key === 'Enter' && input.value !== '') {
+    event.preventDefault();
+    document.querySelector('.search-button').click();
+    input.value = '';
+  }
+});
+
 // loop through agents to get their names and portraits
 var xhr = new XMLHttpRequest();
 xhr.addEventListener('load', function () {
-
   var agents = JSON.parse(this.responseText).data;
+
   agents.sort(function (a, b) {
     var nameA = a.displayName.toUpperCase();
     var nameB = b.displayName.toUpperCase();
@@ -204,7 +214,14 @@ xhr.addEventListener('load', function () {
     starButton.className = 'star-button';
 
     starButton.addEventListener('click', function () {
-      this.classList.toggle('favorite');
+      var favoriteClass = 'favorite';
+      var parentElement = this.parentElement;
+      if (this.classList.contains(favoriteClass)) {
+        parentElement.style.order = '';
+      } else {
+        parentElement.style.order = -1;
+      }
+      this.classList.toggle(favoriteClass);
     });
 
     var starIcon = document.createElement('i');
@@ -262,7 +279,14 @@ xhr2.addEventListener('load', function () {
     starButton.className = 'star-button';
 
     starButton.addEventListener('click', function () {
-      this.classList.toggle('favorite');
+      var favoriteClass = 'favorite';
+      var parentElement = this.parentElement;
+      if (this.classList.contains(favoriteClass)) {
+        parentElement.style.order = '';
+      } else {
+        parentElement.style.order = -1;
+      }
+      this.classList.toggle(favoriteClass);
     });
 
     var starIcon = document.createElement('i');
@@ -317,7 +341,14 @@ xhr3.addEventListener('load', function () {
     starButton.className = 'star-button';
 
     starButton.addEventListener('click', function () {
-      this.classList.toggle('favorite');
+      var favoriteClass = 'favorite';
+      var parentElement = this.parentElement;
+      if (this.classList.contains(favoriteClass)) {
+        parentElement.style.order = '';
+      } else {
+        parentElement.style.order = -1;
+      }
+      this.classList.toggle(favoriteClass);
     });
 
     var starIcon = document.createElement('i');
@@ -347,40 +378,3 @@ xhr3.addEventListener('load', function () {
 );
 xhr3.open('GET', 'https://valorant-api.com/v1/weapons', true);
 xhr3.send();
-
-// Search bar
-var searchInput = document.querySelector('input[type="text"]');
-var searchButton = document.querySelector('input[type="button"]');
-var searchResults = document.querySelector('.search-results');
-
-var xhr4 = new XMLHttpRequest();
-searchButton.addEventListener('click', function () {
-  var searchQuery = searchInput.value;
-
-  xhr4.open('GET', `https://valorant-api.com/v1/agents?displayName=${searchQuery}`);
-  xhr4.send();
-
-  xhr4.addEventListener('load', function () {
-    var agents = JSON.parse(this.responseText).data;
-
-    var agentElements = agents.map(function (agent) {
-      var agentLink = document.createElement('a');
-      agentLink.href = '#';
-      agentLink.innerHTML = agent.displayName;
-      agentLink.addEventListener('click', function () {
-        viewSwap(`https://valorant-api.com/v1/agents/${agent.uuid}`);
-      });
-
-      var agentName = document.createElement('p');
-      agentName.innerHTML = agent.displayName;
-
-      return [agentLink, agentName];
-    });
-
-    searchResults.innerHTML = '';
-    agentElements.forEach(function (agentElement) {
-      searchResults.appendChild(agentElement[0]);
-      searchResults.appendChild(agentElement[1]);
-    });
-  });
-});
