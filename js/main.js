@@ -122,7 +122,6 @@ var $agentsTab = document.querySelector('.agents-tab');
 var $mapsTab = document.querySelector('.maps-tab');
 var $weaponsTab = document.querySelector('.weapons-tab');
 var $searchButton = document.querySelector('.search-button');
-
 $homeTab.addEventListener('click', function () {
   viewSwap('home');
   $dropdownModal.className = 'dropdown-menu hidden';
@@ -244,8 +243,7 @@ xhr.addEventListener('load', function () {
 
     document.getElementById('agents-list').appendChild(agentContainer);
   }
-}
-);
+});
 xhr.open('GET', 'https://valorant-api.com/v1/agents', true);
 xhr.send();
 
@@ -378,3 +376,48 @@ xhr3.addEventListener('load', function () {
 );
 xhr3.open('GET', 'https://valorant-api.com/v1/weapons', true);
 xhr3.send();
+
+document.addEventListener('DOMContentLoaded', function () {
+  var searchButtons = document.querySelectorAll('.search-button');
+  searchButtons.forEach(function (button) {
+    button.addEventListener('click', function (event) {
+      event.preventDefault();
+
+      var searchInput = this.parentNode.querySelector('.search-input').value.toLowerCase();
+      var searchXhr = new XMLHttpRequest();
+      searchXhr.addEventListener('load', function () {
+        var agents = JSON.parse(this.responseText).data;
+        var searchResultsDiv = document.getElementById('search-results');
+        var searchResultsHTML = ' <div class="grey-page"> ' + '<div>' + '<div class="header">' + '<h1>Search Results</h1>' + '</div>' + '</div>' + '</div>';
+        agents.forEach(function (agent) {
+          if (agent.displayName.toLowerCase().includes(searchInput)) {
+            if (agent.displayName === 'Sova' && agent.isPlayableCharacter !== true) {
+              return;
+            }
+
+            searchResultsHTML += '<div class="search-container">';
+            searchResultsHTML += '<p class="search-name">' + agent.displayName + '</p>';
+            searchResultsHTML += '<div class="search-image-container">';
+            searchResultsHTML += '<img src="' + agent.fullPortrait + '" alt="' + agent.displayName + '" class="search-image">';
+            searchResultsHTML += '</div>';
+            searchResultsHTML += '</div>';
+
+          }
+        });
+        if (searchResultsHTML) {
+          searchResultsDiv.innerHTML = searchResultsHTML;
+          searchResultsDiv.classList.remove('hidden');
+          viewSwap('search-results');
+          searchInput.value = '';
+          searchInput.placeholder = 'Search';
+          $dropdownModal.className = 'dropdown-menu hidden';
+        } else {
+          searchResultsDiv.innerHTML = '';
+          searchResultsDiv.classList.add('hidden');
+        }
+      });
+      searchXhr.open('GET', 'https://valorant-api.com/v1/agents');
+      searchXhr.send();
+    });
+  });
+});

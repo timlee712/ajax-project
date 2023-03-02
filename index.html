@@ -21,10 +21,10 @@
     <h3><a href="#" class="agents-tab"><i class="fa-solid fa-person-rifle"></i> Agents</a></h3>
     <h3><a href="#" class="maps-tab"><i class="fa-solid fa-map"></i> Maps</a></h3>
     <h3><a href="#" class="weapons-tab"><i class="fa-solid fa-gun"></i> Weapons</a></h3>
-    <div class="nav-search">
+    <form class="nav-search">
       <input type="text" class="search-input" placeholder="Search">
       <button type="submit" class="search-button">Search</button>
-    </div>
+    </form>
     <div class="dropdown"><a href="#" class="box"><i class="fa-solid fa-bars"></i></a>
   </header>
   <main>
@@ -35,6 +35,11 @@
         <h3><a href="#" class="maps-drop"><i class="fa-solid fa-map"></i> Maps</a></h3>
         <hr>
         <h3><a href="#" class="weapons-drop"><i class="fa-solid fa-gun"></i> Weapons</a></h3>
+        <hr>
+        <form class="mobile-search">
+          <input type="text" class="search-input" placeholder="Search">
+          <button type="submit" class="search-button">Search</button>
+        </form>
       </div>
     </div>
     <div data-view="home" class="home">
@@ -45,8 +50,10 @@
           <div class="red-box">
             <img src="images/valorant-logo-white.svg" alt="valorant-logo">
           </div>
-          <input type="text" class="search-input" placeholder="Search">
-          <button type="submit" class="search-button">Search</button>
+          <form>
+            <input type="text" class="search-input" placeholder="Search">
+            <button type="submit" class="search-button">Search</button>
+          </form>
         </div>
       </div>
 
@@ -87,10 +94,6 @@
 
 
     <div data-view="agents-page" class="agents hidden">
-      <div class="mobile-search">
-        <input type="text" class="search-input" placeholder="Search">
-        <button type="submit" class="search-button">Search</button>
-      </div>
       <div class="grey-page">
         <div>
           <div class="header">
@@ -106,10 +109,7 @@
 
 
     <div data-view="maps-page" class="maps hidden">
-      <div class="mobile-search">
-        <input type="text" class="search-input" placeholder="Search">
-        <button type="submit" class="search-button">Search</button>
-      </div>
+
       <div class="grey-page">
         <div>
           <div class="header">
@@ -124,10 +124,7 @@
 
 
     <div data-view="weapons-page" class="weapons hidden">
-      <div class="mobile-search">
-        <input type="text" class="search-input" placeholder="Search">
-        <button type="submit" class="search-button">Search</button>
-      </div>
+
       <div class="grey-page">
         <div>
           <div class="header">
@@ -140,20 +137,15 @@
       </div>
     </div>
 
-    <div data-view="search-results" class="search-results hidden">
-      <div class="mobile-search">
-        <input type="text" class="search-input" placeholder="Search">
-        <button type="submit" class="search-button">Search</button>
-      </div>
+    <div data-view="search-results" id="search-results" class="search-results hidden">
+
       <div class="grey-page">
         <div>
           <div class="header">
             <h1>Search Results</h1>
           </div>
         </div>
-        <div id="search-list">
 
-        </div>
       </div>
   </main>
   <script src="js/data.js"></script>
