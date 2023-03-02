@@ -388,7 +388,7 @@ document.addEventListener('DOMContentLoaded', function () {
       searchXhr.addEventListener('load', function () {
         var agents = JSON.parse(this.responseText).data;
         var searchResultsDiv = document.getElementById('search-results');
-        var searchResultsHTML = ' <div class="grey-page"> ' + '<div>' + '<div class="header">' + '<h1>Search Results</h1>' + '</div>' + '</div>' + '</div>';
+        var searchResultsHTML = ' <div class="grey-page2"> ' + '<div>' + '<div class="header">' + '<h1>Search Results</h1>' + '</div>' + '</div>' + '</div>';
         agents.forEach(function (agent) {
           if (agent.displayName.toLowerCase().includes(searchInput)) {
             if (agent.displayName === 'Sova' && agent.isPlayableCharacter !== true) {
@@ -410,13 +410,91 @@ document.addEventListener('DOMContentLoaded', function () {
           viewSwap('search-results');
           searchInput.value = '';
           searchInput.placeholder = 'Search';
-          $dropdownModal.className = 'dropdown-menu hidden';
         } else {
           searchResultsDiv.innerHTML = '';
           searchResultsDiv.classList.add('hidden');
         }
       });
       searchXhr.open('GET', 'https://valorant-api.com/v1/agents');
+      searchXhr.send();
+    });
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  var searchButtons = document.querySelectorAll('.search-button');
+  searchButtons.forEach(function (button) {
+    button.addEventListener('click', function (event) {
+      event.preventDefault();
+
+      var searchInput = this.parentNode.querySelector('.search-input').value.toLowerCase();
+      var searchXhr = new XMLHttpRequest();
+      searchXhr.addEventListener('load', function () {
+        var maps = JSON.parse(this.responseText).data;
+        var searchResultsDiv = document.getElementById('search-results');
+        var searchResultsHTML = ' <div class="grey-page2"> ' + '<div>' + '<div class="header">' + '<h1>Search Results</h1>' + '</div>' + '</div>' + '</div>';
+        maps.forEach(function (map) {
+          if (map.displayName.toLowerCase().includes(searchInput)) {
+            searchResultsHTML += '<div class="search-container">';
+            searchResultsHTML += '<p class="search-name">' + map.displayName + '</p>';
+            searchResultsHTML += '<div class="search-image-container">';
+            searchResultsHTML += '<img src="' + map.splash + '" alt="' + map.displayName + '" class="search-image">';
+            searchResultsHTML += '</div>';
+            searchResultsHTML += '</div>';
+
+          }
+        });
+        if (searchResultsHTML) {
+          searchResultsDiv.innerHTML = searchResultsHTML;
+          searchResultsDiv.classList.remove('hidden');
+          viewSwap('search-results');
+          searchInput.value = '';
+          searchInput.placeholder = 'Search';
+        } else {
+          searchResultsDiv.innerHTML = '';
+          searchResultsDiv.classList.add('hidden');
+        }
+      });
+      searchXhr.open('GET', 'https://valorant-api.com/v1/maps');
+      searchXhr.send();
+    });
+  });
+});
+document.addEventListener('DOMContentLoaded', function () {
+  var searchButtons = document.querySelectorAll('.search-button');
+  searchButtons.forEach(function (button) {
+    button.addEventListener('click', function (event) {
+      event.preventDefault();
+
+      var searchInput = this.parentNode.querySelector('.search-input').value.toLowerCase();
+      var searchXhr = new XMLHttpRequest();
+      searchXhr.addEventListener('load', function () {
+        var weapons = JSON.parse(this.responseText).data;
+        var searchResultsDiv = document.getElementById('search-results');
+        var searchResultsHTML = ' <div class="grey-page2"> ' + '<div>' + '<div class="header">' + '<h1>Search Results</h1>' + '</div>' + '</div>' + '</div>';
+        weapons.forEach(function (weapon) {
+          if (weapon.displayName.toLowerCase().includes(searchInput)) {
+            searchResultsHTML += '<div class="search-container">';
+            searchResultsHTML += '<p class="search-name">' + weapon.displayName + '</p>';
+            searchResultsHTML += '<div class="search-image-container">';
+            searchResultsHTML += '<img src="' + weapon.displayIcon + '" alt="' + weapon.displayName + '" class="search-image">';
+            searchResultsHTML += '</div>';
+            searchResultsHTML += '</div>';
+
+          }
+        });
+        if (searchResultsHTML) {
+          searchResultsDiv.innerHTML = searchResultsHTML;
+          searchResultsDiv.classList.remove('hidden');
+          viewSwap('search-results');
+          searchInput.value = '';
+          searchInput.placeholder = 'Search';
+        } else {
+          searchResultsDiv.innerHTML = '';
+          searchResultsDiv.classList.add('hidden');
+        }
+      });
+      searchXhr.open('GET', 'https://valorant-api.com/v1/weapons');
       searchXhr.send();
     });
   });

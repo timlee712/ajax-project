@@ -432,8 +432,11 @@ header > h3 > a {
     display: flex;
     justify-content: start;
     align-items: center;
-    margin-left: 2rem;
     color: white;
+  }
+
+  .header > h1 {
+    margin-left: 2rem;
   }
 
   .agent-container,
