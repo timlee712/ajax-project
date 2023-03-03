@@ -465,4 +465,13 @@ header > h3 > a {
   .star-button:hover {
     color: #fdd700;
   }
+
+  a > .gif {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 70px;
+    margin-left: 550px;
+  }
 }

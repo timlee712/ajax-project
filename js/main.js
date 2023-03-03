@@ -81,6 +81,9 @@ function viewSwap(viewName) {
   var mapsPage = document.querySelector('.maps');
   var weaponsPage = document.querySelector('.weapons');
   var searchResults = document.querySelector('.search-results');
+  var navInput = document.querySelector('.nav-input');
+  var navButton = document.querySelector('.nav-button');
+  var gif = document.querySelector('.nav-gif');
 
   if (viewName === 'home') {
     homePage.className = 'home';
@@ -88,31 +91,45 @@ function viewSwap(viewName) {
     mapsPage.className = 'maps hidden';
     weaponsPage.className = 'weapons hidden';
     searchResults.className = 'search-results hidden';
+    navInput.className = 'nav-input hidden';
+    navButton.className = 'nav-button hidden';
+    gif.className = 'nav-gif';
   } else if (viewName === 'agents') {
     homePage.className = 'home hidden';
     agentsPage.className = 'agents';
     mapsPage.className = 'maps hidden';
     weaponsPage.className = 'weapons hidden';
     searchResults.className = 'search-results hidden';
+    navInput.className = 'search-input nav-input';
+    navButton.className = 'search-button nav-button';
+    gif.className = 'nav-gif hidden';
   } else if (viewName === 'maps') {
     homePage.className = 'home hidden';
     agentsPage.className = 'agents hidden';
     mapsPage.className = 'maps';
     weaponsPage.className = 'weapons hidden';
     searchResults.className = 'search-results hidden';
+    navInput.className = 'search-input nav-input';
+    navButton.className = 'search-button nav-button';
+    gif.className = 'nav-gif hidden';
   } else if (viewName === 'weapons') {
     homePage.className = 'home hidden';
     agentsPage.className = 'agents hidden';
     mapsPage.className = 'maps hidden';
     weaponsPage.className = 'weapons';
     searchResults.className = 'search-results hidden';
+    navInput.className = 'search-input nav-input';
+    navButton.className = 'search-button nav-button';
+    gif.className = 'nav-gif hidden';
   } else if (viewName === 'search-results') {
     homePage.className = 'home hidden';
     agentsPage.className = 'agents hidden';
     mapsPage.className = 'maps hidden';
     weaponsPage.className = 'weapons hidden';
     searchResults.className = 'search-results';
-
+    navInput.className = 'search-input nav-input';
+    navButton.className = 'search-button nav-button';
+    gif.className = 'nav-gif hidden';
   }
 }
 
@@ -122,6 +139,12 @@ var $agentsTab = document.querySelector('.agents-tab');
 var $mapsTab = document.querySelector('.maps-tab');
 var $weaponsTab = document.querySelector('.weapons-tab');
 var $searchButton = document.querySelector('.search-button');
+var $navGif = document.querySelector('.nav-gif');
+
+$navGif.addEventListener('click', function () {
+  viewSwap('agents');
+});
+
 $homeTab.addEventListener('click', function () {
   viewSwap('home');
   $dropdownModal.className = 'dropdown-menu hidden';
