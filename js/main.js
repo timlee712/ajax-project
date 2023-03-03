@@ -84,6 +84,8 @@ function viewSwap(viewName) {
   var navInput = document.querySelector('.nav-input');
   var navButton = document.querySelector('.nav-button');
   var gif = document.querySelector('.nav-gif');
+  var agentSelect = document.querySelector('.agent-select');
+  var createComp = document.querySelector('.create-comp');
 
   if (viewName === 'home') {
     homePage.className = 'home';
@@ -94,6 +96,8 @@ function viewSwap(viewName) {
     navInput.className = 'nav-input hidden';
     navButton.className = 'nav-button hidden';
     gif.className = 'nav-gif';
+    agentSelect.className = 'agent-select hidden';
+    createComp.className = 'create-comp hidden';
   } else if (viewName === 'agents') {
     homePage.className = 'home hidden';
     agentsPage.className = 'agents';
@@ -103,6 +107,8 @@ function viewSwap(viewName) {
     navInput.className = 'search-input nav-input';
     navButton.className = 'search-button nav-button';
     gif.className = 'nav-gif hidden';
+    agentSelect.className = 'agent-select hidden';
+    createComp.className = 'create-comp hidden';
   } else if (viewName === 'maps') {
     homePage.className = 'home hidden';
     agentsPage.className = 'agents hidden';
@@ -112,6 +118,8 @@ function viewSwap(viewName) {
     navInput.className = 'search-input nav-input';
     navButton.className = 'search-button nav-button';
     gif.className = 'nav-gif hidden';
+    agentSelect.className = 'agent-select hidden';
+    createComp.className = 'create-comp hidden';
   } else if (viewName === 'weapons') {
     homePage.className = 'home hidden';
     agentsPage.className = 'agents hidden';
@@ -121,6 +129,8 @@ function viewSwap(viewName) {
     navInput.className = 'search-input nav-input';
     navButton.className = 'search-button nav-button';
     gif.className = 'nav-gif hidden';
+    agentSelect.className = 'agent-select hidden';
+    createComp.className = 'create-comp hidden';
   } else if (viewName === 'search-results') {
     homePage.className = 'home hidden';
     agentsPage.className = 'agents hidden';
@@ -130,6 +140,30 @@ function viewSwap(viewName) {
     navInput.className = 'search-input nav-input';
     navButton.className = 'search-button nav-button';
     gif.className = 'nav-gif hidden';
+    agentSelect.className = 'agent-select hidden';
+    createComp.className = 'create-comp hidden';
+  } else if (viewName === 'agentSelect') {
+    homePage.className = 'home hidden';
+    agentsPage.className = 'agents hidden';
+    mapsPage.className = 'maps hidden';
+    weaponsPage.className = 'weapons hidden';
+    searchResults.className = 'search-results hidden';
+    navInput.className = 'search-input nav-input';
+    navButton.className = 'search-button nav-button';
+    gif.className = 'nav-gif hidden';
+    agentSelect.className = 'agent-select';
+    createComp.className = 'create-comp hidden';
+  } else if (viewName === 'createComp') {
+    homePage.className = 'home hidden';
+    agentsPage.className = 'agents hidden';
+    mapsPage.className = 'maps hidden';
+    weaponsPage.className = 'weapons hidden';
+    searchResults.className = 'search-results hidden';
+    navInput.className = 'search-input nav-input';
+    navButton.className = 'search-button nav-button';
+    gif.className = 'nav-gif hidden';
+    agentSelect.className = 'agent-select hidden';
+    createComp.className = 'create-comp';
   }
 }
 
@@ -140,6 +174,16 @@ var $mapsTab = document.querySelector('.maps-tab');
 var $weaponsTab = document.querySelector('.weapons-tab');
 var $searchButton = document.querySelector('.search-button');
 var $navGif = document.querySelector('.nav-gif');
+var $agentSelect = document.querySelector('.composition-tab');
+var $createComp = document.querySelector('.create-link');
+
+$createComp.addEventListener('click', function () {
+  viewSwap('createComp');
+});
+
+$agentSelect.addEventListener('click', function () {
+  viewSwap('agentSelect');
+});
 
 $navGif.addEventListener('click', function () {
   viewSwap('agents');
@@ -170,22 +214,27 @@ $searchButton.addEventListener('click', function () {
 var $agentsDrop = document.querySelector('.agents-drop');
 var $mapsDrop = document.querySelector('.maps-drop');
 var $weaponsDrop = document.querySelector('.weapons-drop');
+var $compDrop = document.querySelector('.comp-drop');
+
+$compDrop.addEventListener('click', function () {
+  $dropdownModal.className = 'dropdown-menu hidden';
+  viewSwap('agentSelect');
+
+});
 
 $agentsDrop.addEventListener('click', function () {
-  viewSwap('agents');
   $dropdownModal.className = 'dropdown-menu hidden';
+  viewSwap('agents');
 });
 
 $mapsDrop.addEventListener('click', function () {
-  viewSwap('maps');
   $dropdownModal.className = 'dropdown-menu hidden';
-
+  viewSwap('maps');
 });
 
 $weaponsDrop.addEventListener('click', function () {
-  viewSwap('weapons');
   $dropdownModal.className = 'dropdown-menu hidden';
-
+  viewSwap('weapons');
 });
 
 // triggering a button click on enter
@@ -529,3 +578,44 @@ searchButtons.forEach(function (button) {
     searchXhr.send();
   });
 });
+
+// selecting a map
+var mapImage = document.querySelector('.map-image img');
+var selectMap = document.querySelector('#select-map');
+
+function onMapChange() {
+  var url = 'https://valorant-api.com/v1/maps/';
+  if (selectMap.value === 'ascent') {
+    url = 'https://valorant-api.com/v1/maps/7eaecc1b-4337-bbf6-6ab9-04b8f06b3319';
+  } else if (selectMap.value === 'bind') {
+    url = 'https://valorant-api.com/v1/maps/2c9d57ec-4431-9c5e-2939-8f9ef6dd5cba';
+  } else if (selectMap.value === 'breeze') {
+    url = 'https://valorant-api.com/v1/maps/2fb9a4fd-47b8-4e7d-a969-74b4046ebd53';
+  } else if (selectMap.value === 'fracture') {
+    url = 'https://valorant-api.com/v1/maps/b529448b-4d60-346e-e89e-00a4c527a405';
+  } else if (selectMap.value === 'haven') {
+    url = 'https://valorant-api.com/v1/maps/2bee0dc9-4ffe-519b-1cbd-7fbe763a6047';
+  } else if (selectMap.value === 'icebox') {
+    url = 'https://valorant-api.com/v1/maps/e2ad5c54-4114-a870-9641-8ea21279579a';
+  } else if (selectMap.value === 'lotus') {
+    url = 'https://valorant-api.com/v1/maps/2fe4ed3a-450a-948b-6d6b-e89a78e680a9';
+  } else if (selectMap.value === 'pearl') {
+    url = 'https://valorant-api.com/v1/maps/fd267378-4d1d-484f-ff52-77821ed10dc2';
+  } else if (selectMap.value === 'split') {
+    url = 'https://valorant-api.com/v1/maps/d960549e-485c-e861-8d71-aa9d1aed12a2';
+  }
+
+  var mapXhr = new XMLHttpRequest();
+  mapXhr.open('GET', url);
+  mapXhr.addEventListener('load', function () {
+    if (mapXhr.status === 200) {
+      var mapData = JSON.parse(mapXhr.responseText).data;
+      var splashUrl = mapData.splash;
+      mapImage.src = splashUrl;
+
+    }
+  });
+  mapXhr.send();
+}
+
+selectMap.addEventListener('change', onMapChange);

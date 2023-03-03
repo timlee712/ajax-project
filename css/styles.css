@@ -325,6 +325,113 @@ header > h3 > a {
   display: none;
 }
 
+#agent-select {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.message {
+  color: white;
+  font-size: 1.5rem;
+}
+
+a > h3 {
+  color: white;
+  text-decoration: underline;
+  transition: 0.3s;
+}
+
+#agent-comp {
+  font-size: 1.8rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0;
+}
+
+#comp-header {
+  flex-direction: column;
+}
+
+#composition-entry {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 1rem;
+}
+
+.map-image > img {
+  width: 100%;
+  height: 30vh;
+  object-fit: contain;
+}
+
+#create-composition {
+  background-color: #5c5f74;
+  display: flex;
+  justify-content: center;
+  width: 80vw;
+  border-radius: 0.3em;
+  margin: 0 0 0 10vw;
+}
+
+.comp-container {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  margin: 0 3rem 2rem;
+  border-radius: 0.3em;
+}
+
+.select-map {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  align-self: start;
+}
+
+#select-map {
+  width: 100%;
+  height: 1.5rem;
+  border-radius: 0.3em;
+  border: 0.5px solid black;
+  background-color: white;
+  padding: 0 0.4rem;
+}
+
+.box1 {
+  background-color: #bbb;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10px 20px;
+  margin-bottom: 2rem;
+  border-radius: 0.3em;
+}
+
+.box2 {
+  background-color: #bbb;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10px 20px;
+  margin-bottom: 1rem;
+  border-radius: 0.3em;
+}
+
+#create-comp {
+  font-size: 1.8rem;
+}
+
+.comp-submit {
+  border: none;
+  border-radius: 0.2em;
+  color: white;
+  background-color: #f84453;
+  padding: 5px 8px;
+}
+
 @media only screen and (min-width: 768px) {
   .dropdown {
     display: none;
@@ -376,7 +483,7 @@ header > h3 > a {
     display: flex;
     align-items: center;
     position: relative;
-    left: 465px;
+    left: 220px;
   }
 
   .nav-search > input,
@@ -471,7 +578,66 @@ header > h3 > a {
     justify-content: center;
     align-items: center;
     width: 30%;
-    height: 70px;
-    margin-left: 550px;
+    height: 55px;
+    margin-left: 360px;
+    position: relative;
+    top: 0.5rem;
+  }
+
+  .create-link {
+    width: 100%;
+    margin-left: 880px;
+    transition: 0.3s;
+  }
+
+  a > h3:hover {
+    color: #f84453;
+  }
+
+  #create-comp {
+    font-size: 2rem;
+  }
+
+  #comp-header {
+    flex-direction: row;
+  }
+
+  #agent-comp {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+
+  #create-composition {
+    width: 80%;
+    margin: 0 0 0 10vw;
+  }
+
+  .map-image {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .map-image > img {
+    height: 55vh;
+  }
+
+  .comp-container {
+    width: 70%;
+  }
+
+  .comp-submit {
+    font-size: 1rem;
+  }
+
+  #select-map {
+    font-size: 1rem;
+    padding: 0 0.4rem;
+  }
+
+  #select-map:hover {
+    cursor: pointer;
   }
 }
