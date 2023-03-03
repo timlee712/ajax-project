@@ -619,3 +619,29 @@ function onMapChange() {
 }
 
 selectMap.addEventListener('change', onMapChange);
+
+// agent pool
+var agentPoolXhr = new XMLHttpRequest();
+agentPoolXhr.open('GET', 'https://valorant-api.com/v1/agents');
+agentPoolXhr.addEventListener('load', function () {
+  if (this.status === 200) {
+    var response = JSON.parse(this.responseText);
+    var agents = response.data;
+    var agentPool = document.querySelector('.agent-pool');
+    var html = '';
+
+    agents.forEach(function (agent) {
+      var displayName = agent.displayName;
+      var displayIcon = agent.displayIcon;
+      if (displayName === 'Sova' && agent.isPlayableCharacter !== true) {
+        return;
+      }
+      html += '<div class="agent-pool-container" name="' + displayName + '">';
+      html += '<button class="icon-button" type="button"><img src="' + displayIcon + '" alt="' + displayName + '"></button>';
+      html += '</div>';
+    });
+    agentPool.innerHTML = html;
+  }
+}
+);
+agentPoolXhr.send();
