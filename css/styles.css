@@ -321,6 +321,10 @@ header > h3 > a {
   color: #fdd663;
 }
 
+.gif {
+  display: none;
+}
+
 @media only screen and (min-width: 768px) {
   .dropdown {
     display: none;

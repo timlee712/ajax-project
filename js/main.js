@@ -175,18 +175,12 @@ input.addEventListener('keypress', function (event) {
   }
 });
 
-// arrays for favorited agents, maps, and weapons
-var favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-var agents = [];
-var maps = [];
-var weapons = [];
-
 // loop through agents to get their names and portraits
 function renderAgents() {
   var agentList = document.getElementById('agents-list');
   agentList.innerHTML = '';
 
-  agents.forEach(function (agent) {
+  data.agents.forEach(function (agent) {
     var agentName = agent.displayName;
     var agentPortrait = agent.fullPortrait;
 
@@ -205,7 +199,7 @@ function renderAgents() {
     var starButton = document.createElement('button');
     starButton.className = 'star-button';
 
-    var isFavorite = favorites.some(function (favorite) {
+    var isFavorite = data.favorites.some(function (favorite) {
       return favorite.displayName === agentName;
     });
 
@@ -215,21 +209,20 @@ function renderAgents() {
     }
 
     starButton.addEventListener('click', function () {
-      var favoriteIndex = favorites.findIndex(function (favorite) {
+      var favoriteIndex = data.favorites.findIndex(function (favorite) {
         return favorite.displayName === agentName;
       });
 
       if (favoriteIndex === -1) {
-        favorites.unshift(agent);
+        data.favorites.unshift(agent);
         this.classList.add('favorite');
         agentContainer.style.order = -1;
       } else {
-        favorites.splice(favoriteIndex, 1);
+        data.favorites.splice(favoriteIndex, 1);
         this.classList.remove('favorite');
         agentContainer.style.order = '';
       }
 
-      localStorage.setItem('favorites', JSON.stringify(favorites));
     });
 
     var starIcon = document.createElement('i');
@@ -258,8 +251,8 @@ function renderAgents() {
 function loadAgents() {
   var xhr = new XMLHttpRequest();
   xhr.addEventListener('load', function () {
-    agents = JSON.parse(this.responseText).data;
-    agents.sort(function (a, b) {
+    data.agents = JSON.parse(this.responseText).data;
+    data.agents.sort(function (a, b) {
       var nameA = a.displayName.toUpperCase();
       var nameB = b.displayName.toUpperCase();
       if (nameA < nameB) {
@@ -284,7 +277,7 @@ function renderMaps() {
   var mapList = document.getElementById('maps-list');
   mapList.innerHTML = '';
 
-  maps.forEach(function (map) {
+  data.maps.forEach(function (map) {
     var mapName = map.displayName;
     var mapSplash = map.splash;
 
@@ -298,7 +291,7 @@ function renderMaps() {
     var starButton = document.createElement('button');
     starButton.className = 'star-button';
 
-    var isFavorite = favorites.some(function (favorite) {
+    var isFavorite = data.favorites.some(function (favorite) {
       return favorite.displayName === mapName;
     });
 
@@ -308,21 +301,20 @@ function renderMaps() {
     }
 
     starButton.addEventListener('click', function () {
-      var favoriteIndex = favorites.findIndex(function (favorite) {
+      var favoriteIndex = data.favorites.findIndex(function (favorite) {
         return favorite.displayName === mapName;
       });
 
       if (favoriteIndex === -1) {
-        favorites.unshift(map);
+        data.favorites.unshift(map);
         this.classList.add('favorite');
         mapContainer.style.order = -1;
       } else {
-        favorites.splice(favoriteIndex, 1);
+        data.favorites.splice(favoriteIndex, 1);
         this.classList.remove('favorite');
         mapContainer.style.order = '';
       }
 
-      localStorage.setItem('favorites', JSON.stringify(favorites));
     });
 
     var starIcon = document.createElement('i');
@@ -351,8 +343,8 @@ function renderMaps() {
 function loadMaps() {
   var xhr = new XMLHttpRequest();
   xhr.addEventListener('load', function () {
-    maps = JSON.parse(this.responseText).data;
-    maps.sort(function (a, b) {
+    data.maps = JSON.parse(this.responseText).data;
+    data.maps.sort(function (a, b) {
       var nameA = a.displayName.toUpperCase();
       var nameB = b.displayName.toUpperCase();
       if (nameA < nameB) {
@@ -373,74 +365,11 @@ function loadMaps() {
 loadMaps();
 
 // loop through weapons to get their names and weapon images
-// var xhr3 = new XMLHttpRequest();
-// xhr3.addEventListener('load', function () {
-//   var weapons = JSON.parse(this.responseText).data;
-
-//   weapons.sort(function (a, b) {
-//     var costA = (a.shopData && a.shopData.cost) || 0;
-//     var costB = (b.shopData && b.shopData.cost) || 0;
-//     return costA - costB;
-//   });
-
-//   for (var i = 0; i < weapons.length; i++) {
-//     var weapon = weapons[i];
-//     var weaponName = weapon.displayName;
-//     var weaponIcon = weapon.displayIcon;
-
-//     var weaponNameElement = document.createElement('p');
-//     weaponNameElement.innerText = weaponName;
-//     weaponNameElement.className = 'weapon-name';
-
-//     var starButton = document.createElement('button');
-//     starButton.className = 'star-button';
-
-//     starButton.addEventListener('click', function () {
-//       var favoriteClass = 'favorite';
-//       var parentElement = this.parentElement;
-//       if (this.classList.contains(favoriteClass)) {
-//         parentElement.style.order = '';
-//       } else {
-//         parentElement.style.order = -1;
-//       }
-//       this.classList.toggle(favoriteClass);
-
-//     });
-
-//     var starIcon = document.createElement('i');
-//     starIcon.className = 'fa-solid fa-star';
-
-//     var weaponContainer = document.createElement('div');
-//     weaponContainer.className = 'weapon-container';
-
-//     var weaponImageContainer = document.createElement('div');
-//     weaponImageContainer.className = 'weapon-image-container';
-
-//     if (weaponIcon) {
-//       var weaponImage = document.createElement('img');
-//       weaponImage.setAttribute('alt', weaponName);
-//       weaponImage.className = 'weapon-image';
-//       weaponImage.src = weaponIcon;
-//       weaponImageContainer.appendChild(weaponImage);
-//     }
-
-//     weaponContainer.appendChild(weaponNameElement);
-//     starButton.appendChild(starIcon);
-//     weaponContainer.appendChild(starButton);
-//     weaponContainer.appendChild(weaponImageContainer);
-
-//     document.getElementById('weapons-list').appendChild(weaponContainer);
-//   }
-// }
-
-// );
-// xhr3.open('GET', 'https://valorant-api.com/v1/weapons', true);
-// xhr3.send();
 function renderWeapons() {
   var weaponList = document.getElementById('weapons-list');
   weaponList.innerHTML = '';
 
-  weapons.forEach(function (weapon) {
+  data.weapons.forEach(function (weapon) {
     var weaponName = weapon.displayName;
     var weaponIcon = weapon.displayIcon;
 
@@ -454,7 +383,7 @@ function renderWeapons() {
     var starButton = document.createElement('button');
     starButton.className = 'star-button';
 
-    var isFavorite = favorites.some(function (favorite) {
+    var isFavorite = data.favorites.some(function (favorite) {
       return favorite.displayName === weaponName;
     });
 
@@ -464,21 +393,20 @@ function renderWeapons() {
     }
 
     starButton.addEventListener('click', function () {
-      var favoriteIndex = favorites.findIndex(function (favorite) {
+      var favoriteIndex = data.favorites.findIndex(function (favorite) {
         return favorite.displayName === weaponName;
       });
 
       if (favoriteIndex === -1) {
-        favorites.unshift(weapon);
+        data.favorites.unshift(weapon);
         this.classList.add('favorite');
         weaponContainer.style.order = -1;
       } else {
-        favorites.splice(favoriteIndex, 1);
+        data.favorites.splice(favoriteIndex, 1);
         this.classList.remove('favorite');
         weaponContainer.style.order = '';
       }
 
-      localStorage.setItem('favorites', JSON.stringify(favorites));
     });
 
     var starIcon = document.createElement('i');
@@ -507,8 +435,8 @@ function renderWeapons() {
 function loadWeapons() {
   var xhr = new XMLHttpRequest();
   xhr.addEventListener('load', function () {
-    weapons = JSON.parse(this.responseText).data;
-    weapons.sort(function (a, b) {
+    data.weapons = JSON.parse(this.responseText).data;
+    data.weapons.sort(function (a, b) {
       var costA = (a.shopData && a.shopData.cost) || 0;
       var costB = (b.shopData && b.shopData.cost) || 0;
       return costA - costB;

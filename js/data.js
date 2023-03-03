@@ -1,7 +1,10 @@
 /* exported data */
 
 var data = {
-  favorites: []
+  favorites: [],
+  agents: [],
+  maps: [],
+  weapons: []
 };
 
 window.addEventListener('beforeunload', function () {
@@ -9,6 +12,6 @@ window.addEventListener('beforeunload', function () {
   this.localStorage.setItem('favoriteAgents', favoriteString);
 });
 
-if (localStorage.getItem('favorites')) {
-  data.favorites = JSON.parse(localStorage.getItem('favorites'));
+if (localStorage.getItem('favoriteAgents')) {
+  data.favorites = JSON.parse(localStorage.getItem('favoriteAgents'));
 }
