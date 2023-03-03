@@ -628,6 +628,7 @@ agentPoolXhr.addEventListener('load', function () {
     var response = JSON.parse(this.responseText);
     var agents = response.data;
     var agentPool = document.querySelector('.agent-pool');
+    var agentBox = document.querySelector('.agent-box');
     var html = '';
 
     agents.forEach(function (agent) {
@@ -636,12 +637,30 @@ agentPoolXhr.addEventListener('load', function () {
       if (displayName === 'Sova' && agent.isPlayableCharacter !== true) {
         return;
       }
-      html += '<div class="agent-pool-container" name="' + displayName + '">';
-      html += '<button class="icon-button" type="button"><img src="' + displayIcon + '" alt="' + displayName + '"></button>';
-      html += '</div>';
+      var button = document.createElement('button');
+      button.classList.add('icon-button');
+      button.type = 'button';
+      var img = document.createElement('img');
+      img.src = displayIcon;
+      img.alt = displayName;
+      button.appendChild(img);
+
+      button.addEventListener('click', function () {
+        if (button.parentElement === agentPool) {
+          agentBox.appendChild(button);
+        } else if (button.parentElement === agentBox) {
+          agentPool.appendChild(button);
+        }
+      });
+
+      var container = document.createElement('div');
+      container.classList.add('agent-pool-container');
+      container.setAttribute('name', displayName);
+      container.appendChild(button);
+
+      html += container.outerHTML;
     });
     agentPool.innerHTML = html;
   }
-}
-);
+});
 agentPoolXhr.send();
