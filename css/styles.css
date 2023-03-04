@@ -405,22 +405,22 @@ a > h3 {
   margin-top: 2rem;
 }
 
-.agent-box {
+/* .agent-box {
   background-color: #ddd;
   width: 100%;
+  min-height: 70px;
   display: flex;
   justify-content: center;
   padding: 10px 20px;
   margin-bottom: 2rem;
   border-radius: 0.3em;
-}
+} */
 
 .agent-pool {
   background-color: #bbb;
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 10px 20px;
   margin-bottom: 1rem;
   border-radius: 0.3em;
   flex-wrap: wrap;
@@ -461,10 +461,6 @@ a > h3 {
   border: none;
 }
 
-.icon-button:active {
-  border: #f84453 2px solid;
-}
-
 #yo {
   display: none;
 }
@@ -480,6 +476,10 @@ a > h3 {
   font-weight: 600;
   align-self: flex-start;
   margin-bottom: 0.5rem;
+}
+
+.selected {
+  border: #f84453 2px solid;
 }
 
 @media only screen and (min-width: 768px) {

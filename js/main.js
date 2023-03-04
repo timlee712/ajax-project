@@ -628,7 +628,6 @@ agentPoolXhr.addEventListener('load', function () {
     var response = JSON.parse(this.responseText);
     var agents = response.data;
     var agentPool = document.querySelector('.agent-pool');
-    var agentBox = document.querySelector('.agent-box');
     var html = '';
 
     agents.forEach(function (agent) {
@@ -645,14 +644,6 @@ agentPoolXhr.addEventListener('load', function () {
       img.alt = displayName;
       button.appendChild(img);
 
-      button.addEventListener('click', function () {
-        if (button.parentElement === agentPool) {
-          agentBox.appendChild(button);
-        } else if (button.parentElement === agentBox) {
-          agentPool.appendChild(button);
-        }
-      });
-
       var container = document.createElement('div');
       container.classList.add('agent-pool-container');
       container.setAttribute('name', displayName);
@@ -664,3 +655,39 @@ agentPoolXhr.addEventListener('load', function () {
   }
 });
 agentPoolXhr.send();
+
+var agentPool = document.querySelector('.agent-pool');
+agentPool.addEventListener('click', function () {
+  var agentName = event.target.getAttribute('alt');
+  var agentPoolContainer = document.querySelectorAll('.agent-pool-container');
+  agentPoolContainer.forEach(function (container) {
+    if (container.getAttribute('name') === agentName) {
+      container.classList.toggle('selected');
+    }
+  });
+});
+
+// submit form
+var form = document.querySelector('.comp-container');
+
+form.addEventListener('submit', function (event) {
+  event.preventDefault();
+
+  var selectedMap = selectMap.value;
+  var selectedAgents = [];
+
+  var selectedAgentContainers = document.querySelectorAll('.agent-pool-container.selected');
+  selectedAgentContainers.forEach(function (container) {
+    var agentName = container.getAttribute('name');
+    selectedAgents.push(agentName);
+  });
+
+  var comp = {
+    map: selectedMap,
+    agents: selectedAgents
+  };
+
+  data.agentComps.push(comp);
+
+  form.reset();
+});
