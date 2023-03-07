@@ -22,5 +22,5 @@ window.addEventListener('beforeunload', function () {
 });
 
 if (localStorage.getItem('agentComps')) {
-  data.favorites = JSON.parse(localStorage.getItem('agentComps'));
+  data.agentComps = JSON.parse(localStorage.getItem('agentComps'));
 }

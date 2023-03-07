@@ -688,6 +688,24 @@ form.addEventListener('submit', function (event) {
   };
 
   data.agentComps.push(comp);
-
+  viewSwap('agentSelect');
+  var agentPoolContainer = document.querySelectorAll('.agent-pool-container');
+  agentPoolContainer.forEach(function (container) {
+    container.classList.remove('selected');
+  });
+  var mapImage = document.querySelector('#map-image');
+  mapImage.src = 'images/valorant-maps.jpeg';
   form.reset();
+
+  toggleNoEntries();
 });
+
+function toggleNoEntries() {
+  var message = document.querySelector('.message');
+
+  if (data.agentComps.length === 0) {
+    message.classList.remove('hidden');
+  } else {
+    message.classList.add('hidden');
+  }
+}
