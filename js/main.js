@@ -675,7 +675,7 @@ function displayCompSubmission(comp) {
 
   var mapName = document.createElement('h1');
   mapName.textContent = comp.map;
-  mapName.classList.add('map-name');
+  mapName.classList.add('map-names');
   compContainer.appendChild(mapName);
 
   var agentsList = document.createElement('ul');
@@ -693,7 +693,7 @@ function displayCompSubmission(comp) {
       if (agentData) {
         var agentImage = document.createElement('img');
         agentImage.src = agentData.displayIcon;
-        agentImage.classList.add('agent-image');
+        agentImage.classList.add('agent-images');
         agentItem.appendChild(agentImage);
       }
     });
@@ -742,15 +742,15 @@ form.addEventListener('submit', function (event) {
   mapImage.src = 'images/valorant-maps.jpeg';
   form.reset();
 
-  toggleNoEntries();
+  // toggleNoEntries();
 });
 
-function toggleNoEntries() {
-  var message = document.querySelector('.message');
+// function toggleNoEntries() {
+//   var message = document.querySelector('.message');
 
-  if (data.agentComps.length === 0) {
-    message.classList.remove('hidden');
-  } else {
-    message.classList.add('hidden');
-  }
-}
+//   if (data.agentComps.length === 0) {
+//     message.classList.remove('hidden');
+//   } else {
+//     message.classList.add('hidden');
+//   }
+// }

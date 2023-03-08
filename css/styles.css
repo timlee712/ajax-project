@@ -472,13 +472,13 @@ a > h3 {
   border: #f84453 2px solid;
 }
 
-.map-name {
+.map-names {
   color: white;
   margin: 0.5rem 0 0 1.5rem;
   padding: 0;
 }
 
-.agent-image {
+.agent-images {
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -489,7 +489,7 @@ a > h3 {
   background-color: #bbb;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   margin: 2rem 3rem;
   border-radius: 0.3em;
 }
@@ -691,14 +691,10 @@ li {
     margin: 0 0 0 10vw;
   }
 
-  .map-image {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-  }
-
+  /*
   .map-image > img {
     height: 55vh;
-  }
+  } */
 
   .comp-container {
     width: 70%;
@@ -736,14 +732,13 @@ li {
     margin: 2rem 10vw 4rem;
   }
 
-  .agent-image {
+  .agent-images {
     width: 50%;
     margin-left: 3rem;
   }
 
-  .map-name {
+  .map-names {
     font-size: 2rem;
-    margin-left: 2.2rem;
     margin-top: 1rem;
   }
 }
