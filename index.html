@@ -21,10 +21,12 @@
     <h3><a href="#" class="agents-tab"><i class="fa-solid fa-person-rifle"></i> Agents</a></h3>
     <h3><a href="#" class="maps-tab"><i class="fa-solid fa-map"></i> Maps</a></h3>
     <h3><a href="#" class="weapons-tab"><i class="fa-solid fa-gun"></i> Weapons</a></h3>
+    <h3><a href="#" class="composition-tab"><i class="fa-solid fa-note-sticky"></i> Agent Composition</a></h3>
     <form class="nav-search">
-      <input type="text" class="search-input" placeholder="Search">
-      <button type="submit" class="search-button">Search</button>
+      <input type="text" class="search-input nav-input hidden" placeholder="Search">
+      <button type="submit" class="search-button nav-button hidden">Search</button>
     </form>
+    <a href="#" class="nav-gif"><img src="images/val-gif.gif" alt="valorant-gif" class="gif"></a>
     <div class="dropdown"><a href="#" class="box"><i class="fa-solid fa-bars"></i></a>
   </header>
   <main>
@@ -35,6 +37,8 @@
         <h3><a href="#" class="maps-drop"><i class="fa-solid fa-map"></i> Maps</a></h3>
         <hr>
         <h3><a href="#" class="weapons-drop"><i class="fa-solid fa-gun"></i> Weapons</a></h3>
+        <hr>
+        <h3><a href="#" class="comp-drop"><i class="fa-solid fa-note-sticky"></i> Agent Composition</a></h3>
         <hr>
         <form class="mobile-search">
           <input type="text" class="search-input" placeholder="Search">
@@ -138,6 +142,57 @@
       </div>
     </div>
 
+    <div data-view="agent-select" class="agent-select hidden">
+      <div class="grey-page">
+        <div>
+          <div class="header" id="comp-header">
+            <h1 id="agent-comp">Agent Composition</h1>
+            <a href="#" class="create-link"> <h3>Create a New Composition</h3> </a>
+          </div>
+        </div>
+        <div id="composition-entry">
+          <p class="message hidden">No composition found.</p>
+        </div>
+      </div>
+    </div>
+
+    <div data-view="create-comp" class="create-comp hidden">
+      <div class="grey-page">
+        <div id="blank">
+          <div class="header">
+            <h1 id="create-comp">Create Agent Composition</h1>
+          </div>
+        </div>
+        <div id="create-composition">
+          <form class="comp-container">
+            <div id="bo">bo</div>
+            <div class="map-image">
+              <img src="images/valorant-maps.jpeg" alt="map" id="map-image">
+            </div>
+            <div class="select-map">
+              <select name="map" id="select-map" required>
+                <option value="" selected disabled>Select a Map</option>
+                <option value="ascent">Ascent</option>
+                <option value="bind">Bind</option>
+                <option value="breeze">Breeze</option>
+                <option value="fracture">Fracture</option>
+                <option value="haven">Haven</option>
+                <option value="icebox">Icebox</option>
+                <option value="lotus">Lotus</option>
+                <option value="pearl">Pearl</option>
+                <option value="split">Split</option>
+              </select>
+            </div>
+            <label>Select agents:</label>
+            <div class="agent-pool">
+            </div>
+            <button type="submit" class="comp-submit">Submit</button>
+          </form>
+        </div>
+      </div>
+      <div id="yo">yo</div>
+    </div>
+
     <div data-view="search-results" id="search-results" class="search-results hidden">
 
       <div class="grey-page">
@@ -148,6 +203,7 @@
         </div>
 
       </div>
+
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>

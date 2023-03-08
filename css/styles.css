@@ -325,6 +325,189 @@ header > h3 > a {
   display: none;
 }
 
+#agent-select {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.message {
+  color: white;
+  font-size: 1.5rem;
+}
+
+a > h3 {
+  color: white;
+  text-decoration: underline;
+  transition: 0.3s;
+}
+
+#agent-comp {
+  font-size: 1.8rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0;
+}
+
+#comp-header {
+  flex-direction: column;
+}
+
+#composition-entry {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 1rem;
+}
+
+.map-image > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0.5em;
+  border: none;
+}
+
+#create-composition {
+  background-color: #bbb;
+  display: flex;
+  justify-content: center;
+  border-radius: 0.3em;
+}
+
+#blank {
+  margin: 0;
+}
+
+.comp-container {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  margin: 0 3rem 2rem;
+  border-radius: 0.3em;
+}
+
+.select-map {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  align-self: start;
+}
+
+#select-map {
+  width: 100%;
+  height: 1.5rem;
+  border-radius: 0.3em;
+  border: 0.5px solid black;
+  background-color: white;
+  padding: 0 0.4rem;
+  margin-top: 2rem;
+}
+
+.agent-pool {
+  background-color: #bbb;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  border-radius: 0.3em;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+#create-comp {
+  font-size: 1.8rem;
+}
+
+.comp-submit {
+  border: none;
+  border-radius: 0.2em;
+  color: white;
+  background-color: #f84453;
+  padding: 5px 8px;
+  margin-top: 0.5rem;
+}
+
+.agent-pool-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 20%;
+  background-color: #ddd;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.icon-button > img {
+  width: 100%;
+  height: 100%;
+}
+
+.icon-button {
+  background-color: #ddd;
+  border: none;
+}
+
+#yo {
+  display: none;
+}
+
+#bo {
+  color: #bbb;
+  font-size: 1.5rem;
+}
+
+.comp-container > label {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 600;
+  align-self: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.selected {
+  border: #f84453 2px solid;
+}
+
+.map-name {
+  color: white;
+  margin: 0.5rem 0 0 1.5rem;
+  padding: 0;
+}
+
+.agent-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.comp-container-view {
+  width: 100%;
+  background-color: #bbb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem 3rem;
+  border-radius: 0.3em;
+}
+
+ul {
+  padding: 0;
+  margin: 1rem;
+  list-style-type: none;
+  display: flex;
+  background-color: #ddd;
+  border-radius: 0.3em;
+}
+
+li {
+  display: inline-block;
+  margin: 10px;
+}
+
 @media only screen and (min-width: 768px) {
   .dropdown {
     display: none;
@@ -376,7 +559,7 @@ header > h3 > a {
     display: flex;
     align-items: center;
     position: relative;
-    left: 465px;
+    left: 220px;
   }
 
   .nav-search > input,
@@ -464,5 +647,103 @@ header > h3 > a {
 
   .star-button:hover {
     color: #fdd700;
+  }
+
+  a > .gif {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 55px;
+    margin-left: 360px;
+    position: relative;
+    top: 0.5rem;
+  }
+
+  .create-link {
+    width: 100%;
+    margin-left: 880px;
+    transition: 0.3s;
+  }
+
+  a > h3:hover {
+    color: #f84453;
+  }
+
+  #create-comp {
+    font-size: 2rem;
+  }
+
+  #comp-header {
+    flex-direction: row;
+  }
+
+  #agent-comp {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+
+  #create-composition {
+    width: 80%;
+    margin: 0 0 0 10vw;
+  }
+
+  .map-image {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .map-image > img {
+    height: 55vh;
+  }
+
+  .comp-container {
+    width: 70%;
+  }
+
+  .comp-submit {
+    font-size: 1rem;
+  }
+
+  #select-map {
+    font-size: 1rem;
+    padding: 0 0.4rem;
+  }
+
+  #select-map:hover {
+    cursor: pointer;
+  }
+
+  .icon-button {
+    margin: 0 1rem;
+  }
+
+  #blank {
+    margin: 0 0 2.5rem;
+  }
+
+  #yo {
+    display: flex;
+    color: #0f141b;
+    font-size: 2rem;
+  }
+
+  .comp-container-view {
+    width: 80%;
+    margin: 2rem 10vw 4rem;
+  }
+
+  .agent-image {
+    width: 50%;
+    margin-left: 3rem;
+  }
+
+  .map-name {
+    font-size: 2rem;
+    margin-left: 2.2rem;
+    margin-top: 1rem;
   }
 }

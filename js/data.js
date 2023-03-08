@@ -4,7 +4,8 @@ var data = {
   favorites: [],
   agents: [],
   maps: [],
-  weapons: []
+  weapons: [],
+  agentComps: []
 };
 
 window.addEventListener('beforeunload', function () {
@@ -14,4 +15,12 @@ window.addEventListener('beforeunload', function () {
 
 if (localStorage.getItem('favoriteAgents')) {
   data.favorites = JSON.parse(localStorage.getItem('favoriteAgents'));
+}
+window.addEventListener('beforeunload', function () {
+  var agentComps = JSON.stringify(data.agentComps);
+  this.localStorage.setItem('agentComps', agentComps);
+});
+
+if (localStorage.getItem('agentComps')) {
+  data.agentComps = JSON.parse(localStorage.getItem('agentComps'));
 }
