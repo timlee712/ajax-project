@@ -165,6 +165,7 @@ function viewSwap(viewName) {
     agentSelect.className = 'agent-select hidden';
     createComp.className = 'create-comp';
   }
+
 }
 
 // event listener for tabs and drop down
