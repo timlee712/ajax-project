@@ -165,8 +165,17 @@ function viewSwap(viewName) {
     agentSelect.className = 'agent-select hidden';
     createComp.className = 'create-comp';
   }
-
+  localStorage.setItem('view', viewName);
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+  var currentView = localStorage.getItem('view');
+  if (currentView) {
+    viewSwap(currentView);
+  } else {
+    viewSwap('home');
+  }
+});
 
 // event listener for tabs and drop down
 var $homeTab = document.querySelector('.home-tab');
