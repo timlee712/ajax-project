@@ -682,13 +682,6 @@ function displayCompSubmission(comp) {
   mapName.classList.add('map-names');
   mapContainer.appendChild(mapName);
 
-  var editButton = document.createElement('button');
-  var editIcon = document.createElement('i');
-  editIcon.classList.add('fa-solid', 'fa-pen-to-square');
-  editButton.appendChild(editIcon);
-  editButton.classList.add('edit-button');
-  mapContainer.appendChild(editButton);
-
   var agentsList = document.createElement('ul');
   comp.agents.forEach(function (agent) {
     var agentItem = document.createElement('li');
@@ -713,6 +706,20 @@ function displayCompSubmission(comp) {
   });
 
   compContainer.appendChild(agentsList);
+
+  var deleteButton = document.createElement('button');
+  var deleteIcon = document.createElement('i');
+  deleteIcon.classList.add('fa-solid', 'fa-trash-can');
+  deleteButton.appendChild(deleteIcon);
+  deleteButton.classList.add('delete-button');
+  compContainer.appendChild(deleteButton);
+
+  deleteButton.addEventListener('click', function () {
+    var compIndex = data.agentComps.indexOf(comp);
+    data.agentComps.splice(compIndex, 1);
+    compContainer.remove();
+    localStorage.setItem('agentComps', JSON.stringify(data.agentComps));
+  });
 
   var compEntry = document.querySelector('#composition-entry');
   compEntry.appendChild(compContainer);
@@ -755,15 +762,4 @@ form.addEventListener('submit', function (event) {
   mapImage.src = 'images/valorant-maps.jpeg';
   form.reset();
 
-  // toggleNoEntries();
 });
-
-// function toggleNoEntries() {
-//   var message = document.querySelector('.message');
-
-//   if (data.agentComps.length === 0) {
-//     message.classList.remove('hidden');
-//   } else {
-//     message.classList.add('hidden');
-//   }
-// }
