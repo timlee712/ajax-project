@@ -673,10 +673,21 @@ function displayCompSubmission(comp) {
   var compContainer = document.createElement('div');
   compContainer.classList.add('comp-container-view');
 
+  var mapContainer = document.createElement('div');
+  mapContainer.classList.add('map-containers');
+  compContainer.appendChild(mapContainer);
+
   var mapName = document.createElement('h1');
   mapName.textContent = comp.map;
   mapName.classList.add('map-names');
-  compContainer.appendChild(mapName);
+  mapContainer.appendChild(mapName);
+
+  var editButton = document.createElement('button');
+  var editIcon = document.createElement('i');
+  editIcon.classList.add('fa-solid', 'fa-pen-to-square');
+  editButton.appendChild(editIcon);
+  editButton.classList.add('edit-button');
+  mapContainer.appendChild(editButton);
 
   var agentsList = document.createElement('ul');
   comp.agents.forEach(function (agent) {
@@ -697,8 +708,10 @@ function displayCompSubmission(comp) {
         agentItem.appendChild(agentImage);
       }
     });
+
     agentRequest.send();
   });
+
   compContainer.appendChild(agentsList);
 
   var compEntry = document.querySelector('#composition-entry');

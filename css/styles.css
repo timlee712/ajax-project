@@ -504,8 +504,27 @@ ul {
 }
 
 li {
-  display: inline-block;
   margin: 10px;
+}
+
+.map-containers {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.edit-button {
+  width: auto;
+  height: 50%;
+  font-size: 1.3rem;
+  background-color: #868686;
+  border: none;
+  border-radius: 0.2em;
+  color: white;
+  margin: 0.4rem 1rem 0;
+  margin-left: auto;
+  padding-left: 8px;
 }
 
 @media only screen and (min-width: 768px) {
@@ -690,11 +709,6 @@ li {
     width: 80%;
     margin: 0 0 0 10vw;
   }
-
-  /*
-  .map-image > img {
-    height: 55vh;
-  } */
 
   .comp-container {
     width: 70%;
