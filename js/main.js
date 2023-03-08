@@ -668,6 +668,43 @@ agentPool.addEventListener('click', function () {
 });
 
 // submit form
+
+function displayCompSubmission(comp) {
+  var compContainer = document.createElement('div');
+  compContainer.classList.add('comp-container-view');
+
+  var mapName = document.createElement('h1');
+  mapName.textContent = comp.map;
+  mapName.classList.add('map-name');
+  compContainer.appendChild(mapName);
+
+  var agentsList = document.createElement('ul');
+  comp.agents.forEach(function (agent) {
+    var agentItem = document.createElement('li');
+    agentsList.appendChild(agentItem);
+
+    var agentRequest = new XMLHttpRequest();
+    agentRequest.open('GET', 'https://valorant-api.com/v1/agents');
+    agentRequest.addEventListener('load', function () {
+      var agentsData = JSON.parse(agentRequest.responseText).data;
+      var agentData = agentsData.find(function (agentData) {
+        return agentData.displayName === agent;
+      });
+      if (agentData) {
+        var agentImage = document.createElement('img');
+        agentImage.src = agentData.displayIcon;
+        agentImage.classList.add('agent-image');
+        agentItem.appendChild(agentImage);
+      }
+    });
+    agentRequest.send();
+  });
+  compContainer.appendChild(agentsList);
+
+  var compEntry = document.querySelector('#composition-entry');
+  compEntry.appendChild(compContainer);
+}
+
 var form = document.querySelector('.comp-container');
 
 form.addEventListener('submit', function (event) {
@@ -688,6 +725,7 @@ form.addEventListener('submit', function (event) {
   };
 
   data.agentComps.push(comp);
+  displayCompSubmission(comp);
   viewSwap('agentSelect');
   var agentPoolContainer = document.querySelectorAll('.agent-pool-container');
   agentPoolContainer.forEach(function (container) {
