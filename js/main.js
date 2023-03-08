@@ -705,6 +705,13 @@ function displayCompSubmission(comp) {
   compEntry.appendChild(compContainer);
 }
 
+if (localStorage.getItem('agentComps')) {
+  data.agentComps = JSON.parse(localStorage.getItem('agentComps'));
+  data.agentComps.forEach(function (comp) {
+    displayCompSubmission(comp);
+  });
+}
+
 var form = document.querySelector('.comp-container');
 
 form.addEventListener('submit', function (event) {
