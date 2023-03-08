@@ -497,6 +497,7 @@ a > h3 {
 ul {
   padding: 0;
   margin: 1rem;
+  margin-bottom: 0.5rem;
   list-style-type: none;
   display: flex;
   background-color: #ddd;
@@ -512,6 +513,17 @@ li {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+}
+
+.delete-button {
+  font-size: 1.1rem;
+  color: #f84453;
+  background-color: #ddd;
+  align-self: end;
+  margin-right: 1rem;
+  border-radius: 0.2em;
+  border: none;
+  margin-bottom: 0.5rem;
 }
 
 @media only screen and (min-width: 768px) {
@@ -741,5 +753,9 @@ li {
   .map-names {
     font-size: 2rem;
     margin-top: 1rem;
+  }
+
+  .delete-button {
+    font-size: 1.5rem;
   }
 }
