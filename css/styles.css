@@ -526,6 +526,12 @@ li {
   margin-bottom: 0.5rem;
 }
 
+#gekko {
+  width: 50%;
+  height: 50%;
+  object-fit: contain;
+}
+
 @media only screen and (min-width: 768px) {
   .dropdown {
     display: none;

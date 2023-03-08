@@ -646,6 +646,9 @@ agentPoolXhr.addEventListener('load', function () {
       if (displayName === 'Sova' && agent.isPlayableCharacter !== true) {
         return;
       }
+      if (displayName === 'Gekko') {
+        return;
+      }
       var button = document.createElement('button');
       button.classList.add('icon-button');
       button.type = 'button';
