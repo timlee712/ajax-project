@@ -406,17 +406,6 @@ a > h3 {
   margin-top: 2rem;
 }
 
-/* .agent-box {
-  background-color: #ddd;
-  width: 100%;
-  min-height: 70px;
-  display: flex;
-  justify-content: center;
-  padding: 10px 20px;
-  margin-bottom: 2rem;
-  border-radius: 0.3em;
-} */
-
 .agent-pool {
   background-color: #bbb;
   width: 100%;
@@ -501,15 +490,17 @@ a > h3 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 2rem 3rem 4rem;
+  margin: 2rem 3rem;
   border-radius: 0.3em;
 }
 
 ul {
   padding: 0;
-  margin: 0;
+  margin: 1rem;
   list-style-type: none;
   display: flex;
+  background-color: #ddd;
+  border-radius: 0.3em;
 }
 
 li {
@@ -738,5 +729,20 @@ li {
     display: flex;
     color: #0f141b;
     font-size: 2rem;
+  }
+
+  .comp-container-view {
+    width: 80%;
+    margin: 2rem 10vw 4rem;
+  }
+
+  .agent-image {
+    width: 50%;
+    margin-left: 3rem;
+  }
+
+  .map-name {
+    font-size: 2rem;
+    margin-left: 5rem;
   }
 }
