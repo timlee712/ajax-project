@@ -165,7 +165,17 @@ function viewSwap(viewName) {
     agentSelect.className = 'agent-select hidden';
     createComp.className = 'create-comp';
   }
+  localStorage.setItem('view', viewName);
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+  var currentView = localStorage.getItem('view');
+  if (currentView) {
+    viewSwap(currentView);
+  } else {
+    viewSwap('home');
+  }
+});
 
 // event listener for tabs and drop down
 var $homeTab = document.querySelector('.home-tab');
@@ -636,6 +646,9 @@ agentPoolXhr.addEventListener('load', function () {
       if (displayName === 'Sova' && agent.isPlayableCharacter !== true) {
         return;
       }
+      if (displayName === 'Gekko') {
+        return;
+      }
       var button = document.createElement('button');
       button.classList.add('icon-button');
       button.type = 'button';
@@ -673,10 +686,14 @@ function displayCompSubmission(comp) {
   var compContainer = document.createElement('div');
   compContainer.classList.add('comp-container-view');
 
+  var mapContainer = document.createElement('div');
+  mapContainer.classList.add('map-containers');
+  compContainer.appendChild(mapContainer);
+
   var mapName = document.createElement('h1');
   mapName.textContent = comp.map;
-  mapName.classList.add('map-name');
-  compContainer.appendChild(mapName);
+  mapName.classList.add('map-names');
+  mapContainer.appendChild(mapName);
 
   var agentsList = document.createElement('ul');
   comp.agents.forEach(function (agent) {
@@ -693,13 +710,29 @@ function displayCompSubmission(comp) {
       if (agentData) {
         var agentImage = document.createElement('img');
         agentImage.src = agentData.displayIcon;
-        agentImage.classList.add('agent-image');
+        agentImage.classList.add('agent-images');
         agentItem.appendChild(agentImage);
       }
     });
+
     agentRequest.send();
   });
+
   compContainer.appendChild(agentsList);
+
+  var deleteButton = document.createElement('button');
+  var deleteIcon = document.createElement('i');
+  deleteIcon.classList.add('fa-solid', 'fa-trash-can');
+  deleteButton.appendChild(deleteIcon);
+  deleteButton.classList.add('delete-button');
+  compContainer.appendChild(deleteButton);
+
+  deleteButton.addEventListener('click', function () {
+    var compIndex = data.agentComps.indexOf(comp);
+    data.agentComps.splice(compIndex, 1);
+    compContainer.remove();
+    localStorage.setItem('agentComps', JSON.stringify(data.agentComps));
+  });
 
   var compEntry = document.querySelector('#composition-entry');
   compEntry.appendChild(compContainer);
@@ -742,15 +775,10 @@ form.addEventListener('submit', function (event) {
   mapImage.src = 'images/valorant-maps.jpeg';
   form.reset();
 
-  toggleNoEntries();
 });
 
-function toggleNoEntries() {
-  var message = document.querySelector('.message');
-
-  if (data.agentComps.length === 0) {
-    message.classList.remove('hidden');
-  } else {
-    message.classList.add('hidden');
-  }
-}
+// back button
+var backButton = document.querySelector('#back-button');
+backButton.addEventListener('click', function () {
+  viewSwap('agentSelect');
+});
